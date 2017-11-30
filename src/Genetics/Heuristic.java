@@ -8,5 +8,6 @@ package Genetics;
  *
  */
 public class Heuristic {
-	
+
 }
+//als;dkfj
