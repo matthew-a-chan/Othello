@@ -130,7 +130,7 @@ public class Network {
 		//Hidden -> Hidden
 		for(int i=0;i<HiddenLayerCount;i++) {
 			for(int k=0;k<HiddenNeuronCount;k++) {
-				HiddenLayers[i][k].propagate();;
+				HiddenLayers[i][k].propagate();
 			}
 		}
 		
