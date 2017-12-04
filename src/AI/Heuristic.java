@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import NeuralNetwork.Network;
+import gamecabinet.*;
+
 
 /**
  * @author Stephen C.
@@ -37,7 +39,6 @@ public class Heuristic {
 	public double calculate(GameState gs) {
 		int[] Inputs=new int[64];
 		//GET THE INPUT ARRAY FROM THE GAMESTATE
-		for()
 		
 		return network.calculate(Inputs);
 	}
