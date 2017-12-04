@@ -96,9 +96,9 @@ public class Network {
 		System.out.println(calculate(a));
 	}
 
-	public void retrain(double[] weights) {
+	public void train(String[] weights) {
 		for(int i=0;i<Connections.length;i++) {
-			Connections[i].setWeight(weights[i]);
+			Connections[i].setWeight(Double.parseDouble(weights[i]));
 		}
 	}
 

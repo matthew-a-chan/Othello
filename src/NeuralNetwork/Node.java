@@ -39,7 +39,7 @@ public class Node {
 			out.calculateConnection(value);
 		}
 	}
-	
+
 	public void clear() {
 		value=0;
 	}
