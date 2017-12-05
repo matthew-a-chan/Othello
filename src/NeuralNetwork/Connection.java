@@ -3,7 +3,7 @@
  * @author Stephen C.
  * 
  * new comment here!
- * 
+ 
  */
 package NeuralNetwork;
 
