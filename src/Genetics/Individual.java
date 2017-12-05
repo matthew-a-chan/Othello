@@ -17,4 +17,6 @@ public class Individual {
 	//AI
 	//Heuristic
 	//Making da geme werk
+	
+	//new comment!
 }
