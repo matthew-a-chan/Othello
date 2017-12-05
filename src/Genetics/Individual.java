@@ -12,4 +12,9 @@ public class Individual {
 	//Individuals each have ONE AI in them
 	//AI's have one heuristic each
 	//Each Heuristic has ONE Neural network trained for that AI (so one per)
+	
+	//Genetic Algorithm
+	//AI
+	//Heuristic
+	//Making da geme werk
 }
