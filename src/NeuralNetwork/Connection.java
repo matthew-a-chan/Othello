@@ -1,6 +1,7 @@
 /**
 
  * @author Stephen C.
+ * 
  */
 package NeuralNetwork;
 
