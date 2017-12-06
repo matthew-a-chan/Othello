@@ -2,7 +2,8 @@ package AI;
 import gamecabinet.*;
 
 public class MinMaxShrubbery{
-	public void getMove(GameState gs,Move m){
+	public void getMove(GameState gs,Move m)
+	{
 		Move move=new Move();
 		int depth=1;
 		m.setZ(0);
@@ -12,14 +13,17 @@ public class MinMaxShrubbery{
 				player=i;
 			}
 		}
-		while(depth<100 && !Thread.interrupted()){
+		while(depth<100 && !Thread.interrupted())
+		{
 			depth++;
-			MaxNode root=new MaxNode(gs,Integer.MIN_VALUE,Integer.MAX_VALUE,depth, move, player);
+			MaxNode root=new MaxNode(gs,Integer.MIN_VALUE,Integer.MAX_VALUE,depth, move, player, 1);
 			//root.setDepth(depth);
 			move=root.returnMove();
 			System.err.println("Depth:"+depth+" X:"+move.getX()+" Y:"+move.getY()+" Z:"+move.getZ());
 			m.setX(move.getX());
 			m.setY(move.getY());
 		}
+		
+		//Heuristic(File f, gs.getPlayer(player));
 	}
 }
