@@ -4,7 +4,7 @@ import java.util.List;
 import gamecabinet.*;
 
 public class MaxNode {
-	ArrayList<MinNode> child=new ArrayList<MinNode>(0);
+	ArrayList<MaxNode> child=new ArrayList<MaxNode>(0);
 	Integer depth;
 	GameState gs;
 	Integer A;
@@ -12,34 +12,62 @@ public class MaxNode {
 	Move move;
 	List<Move> moves;
 	Integer player;
+	Integer color; //1 for AI -1 for opponent
+	Integer bestMove;
 
-	public MaxNode(GameState gs,Integer A,Integer B,Integer depth,Move move,Integer player){
+	public MaxNode(GameState gs,Integer A,Integer B,Integer depth,Move move,Integer player, Integer color){
 		this.gs=gs;
 		this.A=A;
 		this.B=B;
 		this.depth=depth;
 		this.player=player;
-		makeMoves();
+		this.color = color;
+		bestMove = Integer.MIN_VALUE;
+		makeMoves(gs, depth, color);
 	}
 
-	public void makeMoves(){
-		if(depth>0){
-			moves=gs.getValidMoves();
-			MinNode newNode;
-			while(!moves.isEmpty()&&B>A){
-				Move move=moves.get(0);
-				moves.remove(0);
-				GameState newgs=gs.copyInstance();
+	public int makeMoves(GameState gs, Integer depth, Integer color)
+	{
+
+		if (depth == 0)
+		{
+			return color * 0; //value
+		}
+
+		moves=gs.getValidMoves();
+		MaxNode newNode;
+		while(!moves.isEmpty() && B>A)
+		{
+			Move move=moves.get(0);
+			moves.remove(0);
+			GameState newgs=gs.copyInstance();
+			
+			int m = -makeMoves(gs, depth--, -color);
+			
+			if (bestMove < m)
+			{
+				bestMove = m;
+			}
+
+			/*
 				newgs.makeMove(move, move);
-				newNode=new MinNode(newgs,A,B,depth-1,move,player);
-				if(swap(newNode.getHeuristicValue())){
+				newNode=new MaxNode(newgs,A,B,depth-1,move,player, -color);
+				if(swap(newNode.getHeuristicValue()))
+				{
 					this.move=move;
 				}
 				child.add(newNode);
-			}
+			 */
 		}
+		return bestMove;
 	}
-
+	
+	public Move returnMove()
+	{
+		return move;
+	}
+	
+/*
 	public boolean swap(Integer A){
 		if(A>this.A){
 			this.A=A;
@@ -47,17 +75,17 @@ public class MaxNode {
 		}
 		return false;
 	}
-
-	public Move returnMove(){
-		return move;
-	}
-
+*/
+	
+/*
 	public Integer getHeuristicValue(){
 		double value=0;
+
 		Player you=gs.getPlayer(player);
 		Player notYou=gs.getPlayer(Math.abs(player-1));
 		int yourScore=gs.getScore(you);
 		int	notYourScore=gs.getScore(notYou);
+
 		List<Move>moves=gs.getValidMoves();
 		int turn=gs.numTurn();
 		if(gs.isGameOver()){
@@ -68,13 +96,12 @@ public class MaxNode {
 				return Integer.MIN_VALUE;
 			}
 		}
-		if(depth==0){//raise moves
-			
-			
-			
-			
-			return (int)value;
+
+		if(depth==0)
+		{//raise moves			
+			return (int)value * color;
 		}
 		return A;
 	}
+	*/
 }
