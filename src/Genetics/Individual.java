@@ -1,12 +1,9 @@
 /**
- * @author Stephen C.
+ * @authors Stephen C. & Jon Wu
  */
+
 package Genetics;
 
-/**
- * @author Stephen C.
- *
- */
 public class Individual {
 	//Populations have individuals in them
 	//Individuals each have ONE AI in them
