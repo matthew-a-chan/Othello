@@ -5,6 +5,7 @@ import gamecabinet.*;
 
 public class MinMaxShrubbery
 {
+	
 	File f;
 	Heuristic a=null;
 	
