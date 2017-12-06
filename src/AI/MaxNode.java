@@ -13,25 +13,27 @@ public class MaxNode {
 	List<Move> moves;
 	Integer player;
 	Integer color; //1 for AI -1 for opponent
-	Integer bestMove;
+	Double bestMove;
+	Heuristic h;
 
-	public MaxNode(GameState gs,Integer A,Integer B,Integer depth,Move move,Integer player, Integer color){
+	public MaxNode(GameState gs,Integer A,Integer B,Integer depth,Move move,Integer player, Integer color, Heuristic h){
 		this.gs=gs;
 		this.A=A;
 		this.B=B;
 		this.depth=depth;
 		this.player=player;
 		this.color = color;
-		bestMove = Integer.MIN_VALUE;
+		bestMove = Double.MIN_VALUE;
+		this.h = h;
 		makeMoves(gs, depth, color);
 	}
 
-	public int makeMoves(GameState gs, Integer depth, Integer color)
+	public double makeMoves(GameState gs, Integer depth, Integer color)
 	{
 
 		if (depth == 0)
 		{
-			return color * 0; //value
+			return color * h.calculate(gs); //value
 		}
 
 		moves=gs.getValidMoves();
@@ -42,7 +44,7 @@ public class MaxNode {
 			moves.remove(0);
 			GameState newgs=gs.copyInstance();
 			
-			int m = -makeMoves(gs, depth--, -color);
+			double m = -makeMoves(gs, depth--, -color);
 			
 			if (bestMove < m)
 			{

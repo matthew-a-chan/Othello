@@ -1,12 +1,8 @@
 /**
- * @author Stephen C.
+ * @authors Stephen C. & Jon Wu
  */
 package NeuralNetwork;
 
-/**
- * @author Stephen C.
- *
- */
 public class Network {
 
 	final int InputNeuronCount=64;
@@ -81,19 +77,6 @@ public class Network {
 			Connections[connection.getID()]=connection;
 			//System.out.println("ADDING CONNECTION "+connection.getID());
 		}
-
-
-		int[] a={	
-				1,-1,0,0,0,0,0,1,
-				0,1,-1,0,0,0,-1,0,
-				0,0,0,-1,0,0,1,0,
-				0,1,0,-1,0,-1,0,0,
-				0,1,0,-1,0,0,1,0,
-				0,1,0,0,0,-1,0,0,
-				0,1,-1,1,-1,1,0,0,
-				0,0,-1,1,0,0,0,1
-		};
-		System.out.println(calculate(a));
 	}
 
 	public void train(String[] weights) {
@@ -138,8 +121,8 @@ public class Network {
 		return OutNode.getValue();
 	}
 
-	public static void main(String[] args) {
-		Network network=new Network();
-		new DrawingPane(network);
-	}
+//	public static void main(String[] args) {
+//		Network network=new Network();
+		//new DrawingPane(network);
+//	}
 }
