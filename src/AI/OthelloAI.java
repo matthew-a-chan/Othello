@@ -4,9 +4,8 @@ import java.util.List;
 import gamecabinet.*;
 
 public class OthelloAI extends Player{
-	File f = new File();
 
-	MinMaxShrubbery MMtree=new MinMaxShrubbery(f);
+	MinMaxShrubbery MMtree=new MinMaxShrubbery();
 
 	public boolean isHuman(){
 		return false;
