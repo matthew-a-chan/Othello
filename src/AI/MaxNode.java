@@ -29,7 +29,6 @@ public class MaxNode {
 
 	public double makeMoves(GameState gs, Integer depth, Integer color)
 	{
-		bestMove = Double.MIN_VALUE;
 
 		if (depth == 0)
 		{
