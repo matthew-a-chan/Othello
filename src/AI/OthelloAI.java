@@ -1,9 +1,12 @@
 package AI;
+import java.io.File;
 import java.util.List;
 
-import gamecabinet.*;
+import cabinet.GameState;
+import game.*;
 
 public class OthelloAI extends Player{
+	File f;
 
 	MinMaxShrubbery MMtree=new MinMaxShrubbery();
 
