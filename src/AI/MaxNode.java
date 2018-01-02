@@ -23,7 +23,6 @@ public class MaxNode {
 		this.depth=depth;
 		this.player=player;
 		this.color = color;
-		bestMove = Double.MIN_VALUE;
 		this.h = h;
 		makeMoves(gs, depth, color);
 	}
@@ -36,16 +35,16 @@ public class MaxNode {
 			return color * h.calculate(gs); //value
 		}
 
-		moves=gs.getValidMoves();
-		MaxNode newNode;
-		
+		moves=gs.getValidMoves();  
+		bestMove = Double.MIN_VALUE;
 		while(!moves.isEmpty() && B>A) //modify beta and alpha values
 		{
 			Move move=moves.get(0);
 			moves.remove(0);
 			GameState newgs=gs.copyInstance();
+			newgs.makeMove(move, move);
 			
-			double m = -makeMoves(gs, depth--, -color);
+			double m = -makeMoves(newgs, depth--, -color);
 			
 			if (bestMove < m)
 			{
