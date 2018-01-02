@@ -38,7 +38,8 @@ public class MaxNode {
 
 		moves=gs.getValidMoves();
 		MaxNode newNode;
-		while(!moves.isEmpty() && B>A)
+		
+		while(!moves.isEmpty() && B>A) //modify beta and alpha values
 		{
 			Move move=moves.get(0);
 			moves.remove(0);
