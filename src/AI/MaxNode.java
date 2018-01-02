@@ -30,6 +30,7 @@ public class MaxNode {
 
 	public double makeMoves(GameState gs, Integer depth, Integer color)
 	{
+		bestMove = Double.MIN_VALUE;
 
 		if (depth == 0)
 		{
@@ -43,8 +44,9 @@ public class MaxNode {
 			Move move=moves.get(0);
 			moves.remove(0);
 			GameState newgs=gs.copyInstance();
+			newgs.makeMove(move, move);
 			
-			double m = -makeMoves(gs, depth--, -color);
+			double m = -makeMoves(newgs, depth--, -color);
 			
 			if (bestMove < m)
 			{
