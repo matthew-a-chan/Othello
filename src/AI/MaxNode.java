@@ -35,7 +35,7 @@ public class MaxNode {
 			return color * h.calculate(gs); //value
 		}
 
-		moves=gs.getValidMoves(); 
+		moves=gs.getValidMoves();  
 		bestMove = Double.MIN_VALUE;
 		while(!moves.isEmpty() && B>A) //modify beta and alpha values
 		{
