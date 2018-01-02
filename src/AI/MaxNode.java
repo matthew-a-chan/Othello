@@ -1,7 +1,8 @@
 package AI;
 import java.util.ArrayList;
 import java.util.List;
-import gamecabinet.*;
+import cabinet.*;
+import game.Move;
 
 public class MaxNode {
 	ArrayList<MaxNode> child=new ArrayList<MaxNode>(0);
@@ -42,7 +43,9 @@ public class MaxNode {
 			Move move=moves.get(0);
 			moves.remove(0);
 			GameState newgs=gs.copyInstance();
-			newgs.makeMove(move, move);
+			ArrayList <Move> moves = new ArrayList<Move>();
+			moves.add(move);
+			newgs.makeMove(moves);
 			
 			double m = -makeMoves(newgs, depth--, -color);
 			
