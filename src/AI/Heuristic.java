@@ -5,13 +5,13 @@ package AI;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import NeuralNetwork.Network;
-import gamecabinet.*;
+import cabinet.*;
+import game.Location;
+import game.Player;
 
 
 /**
@@ -41,15 +41,15 @@ public class Heuristic {
 	public double calculate(GameState gs) {
 		int[] Inputs=new int[64];
 		//GET THE INPUT ARRAY FROM THE GAMESTATE
-		Move move=new Move();
+		Location location=new Location();
 		for(int r=0;r<8;r++) {
 			for(int c=0;c<8;c++) {
-				move.x=c;
-				move.y=r;
-				if(gs.getOwner(move)==null) {//If unowned
+				location.x=c;
+				location.y=r;
+				if(gs.getOwner(location)==null) {//If unowned
 					Inputs[8*r+c]=0;
 				}
-				else if(gs.getOwner(move)==thisPlayer) {//If owned by AI -- happy
+				else if(gs.getOwner(location)==thisPlayer) {//If owned by AI -- happy
 					Inputs[8*r+c]=1;
 				}
 				else {//If owned by non-AI -- sad
