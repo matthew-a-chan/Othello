@@ -1,7 +1,9 @@
 package AI;
 import java.io.File;
 
-import gamecabinet.*;
+import cabinet.GameState;
+import game.*;
+import game.Move;
 
 public class MinMaxShrubbery
 {
