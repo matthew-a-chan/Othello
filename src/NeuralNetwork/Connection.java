@@ -16,16 +16,12 @@ import java.awt.Graphics2D;
  */
 public class Connection {
 
-	private static int count=0;
-	private int ID;
-
 	private Node inputNode;
 	private Node outputNode;
 
 	private double weight=0;
 
 	public Connection(Node input,Node output) {
-		ID=count++;
 		inputNode=input;
 		outputNode=output;
 		weight=Math.random()-0.5;
@@ -35,10 +31,6 @@ public class Connection {
 		double value=Math.tanh(input);
 		value*=weight;
 		outputNode.add(value);
-	}
-
-	public int getID() {
-		return ID;
 	}
 
 	public void setWeight(double newWeight) {

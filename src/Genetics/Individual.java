@@ -44,6 +44,10 @@ public class Individual implements Comparable<Individual>{
 		this.ID=ID;
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+	
 	public int getFitness() {
 		return fitness;
 	}

@@ -31,11 +31,11 @@ public class OthelloAI extends Player{
 	}
 
 	public String getName(){
-		return "A Random Walrus";
+		return "DaOthelloAI";
 	}
 	
 	public String getDescription(){
-		return "It's a walrus. What's so difficult?";
+		return "This is probably not going to work";
 	}
 
 	public String getType(){
