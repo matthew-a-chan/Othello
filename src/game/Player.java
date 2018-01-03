@@ -124,7 +124,7 @@ public class Player implements Plugin{
 	 * @param gs the current state of the game
 	 * @param to a move object that must be filled with valid moves, in order, for the player to make
 	 */
-	public void makeMove( GameState gs, List<Move> to ){		
+	public void makeMove( GameState gs, List<Move> to ){
 		HumanMover hm = new HumanMover();
 		display.addGameDisplayListener(hm);
 		try {

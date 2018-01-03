@@ -42,8 +42,15 @@ public class OthelloAI extends Player{
 		return "AI";
 	}
 
-	public Move makeMove(GameState gs,Move m){
-		MMtree.getMove(gs,m);
-		return m;
+	@Override
+	public void makeMove(GameState gs,List<Move> m){
+		Move move=null;
+		m.add(move=new Move());
+		MMtree.getMove(gs,move);
+		if(move.to.x<0||move.to.y<0) {
+			move=gs.getValidMoves().get(0);
+			System.err.println("COULDNT SEARCH:: RANDOM MOVE");
+		}
+		//return m.get(0);
 	}
 }

@@ -25,7 +25,6 @@ public class MinMaxShrubbery
 	public void getMove(GameState gs,Move m)
 	{
 		Move move=new Move();
-		int depth=10;
 		m.to.z=0;
 		Integer player=0;
 		for(int i=0;i<gs.getPlayers().length;i++){
@@ -36,9 +35,9 @@ public class MinMaxShrubbery
 
 		NegaMaxTree root=new NegaMaxTree(gs, move, player, NN);
 		//move=root.returnMove();
-		System.err.println("Depth:"+depth+" X:"+move.to.x+" Y:"+move.to.y+" Z:"+move.to.z);
+		//System.err.println("X:"+move.to.x+" Y:"+move.to.y+" Z:"+move.to.z);
 		m.to.x=move.to.x;
 		m.to.y=move.to.y;
-
+		System.err.println("X:"+m.to.x+" Y:"+m.to.y+" Z:"+m.to.z);
 	}
 }

@@ -53,36 +53,14 @@ public class Playground {
 	
 	public void runGame() {
 		GameState state = new Othello();//WOULD NEED TO MAKE ANOTHER ONE OF THESE FOR EACH GAME
-		GameDisplay disp = new OthelloGUI();//THEN FILL IT WITH TWO AIS
 		
 		for(int i=0;i<2;i++){
 			Individual ind=new Individual(new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+
 					"AI"+File.separator+"GEN"+genNumber+File.separator+"GEN"+genNumber+"-IND"+i),i);//REPLACE THIS WITH OTHELLO AI.NEW INSTANCE()
 			OthelloAI play=(OthelloAI) ind.getPlayer();
 			play.setName("PLAYER"+i);
-			play.setDisplay(disp);
 			state.addPlayer(play);
-		}					
-		
-		disp.init(state);//DISABLE disp TO REMOVE GUI
-		Stage frame = new Stage();
-		frame.setTitle("Game");
-		frame.setWidth(500);
-		frame.setHeight(500);
-		
-		Scene root = disp.getGraphic();
-		frame.setScene(root);
-		
-		frame.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
-			@Override
-			public void handle(WindowEvent we) {
-				state.shutdown();
-			}
-			
-		});
-		
-		frame.show();
+		}
 		state.start();//THEN FINALLY START IT -- IT WILL RETURN INFO UPON COMPLETION
 	}		
 	

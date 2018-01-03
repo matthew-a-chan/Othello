@@ -56,6 +56,7 @@ public abstract class TurnBasedGame implements GameState{
 				ExecutorService exec = Executors.newFixedThreadPool(2);
 				Thread playerMove = new Thread() {
 					public void run() {
+						System.out.println(p.getClass());
 						p.makeMove(g, m);
 					}
 				};
@@ -63,12 +64,13 @@ public abstract class TurnBasedGame implements GameState{
 				Future<?> task = exec.submit(playerMove);
 				exec.shutdown();
 				try {
-					if(p.getClass() == Player.class ){
+					//if(p.getClass() == Player.class ){
 						task.get();
-					}
-					else {
-						task.get(7, TimeUnit.SECONDS);
-					}
+						Thread.sleep(1000);
+					//}
+					//else {
+					//	task.get(7, TimeUnit.SECONDS);
+					//}
 				}
 				catch( InterruptedException e ){
 				}
@@ -76,11 +78,11 @@ public abstract class TurnBasedGame implements GameState{
 					System.err.print(p.getName() +": caused an exception -- ");
 					System.err.println(e.getCause());
 					e.printStackTrace();
-				} catch (TimeoutException e) {
+				}/* catch (TimeoutException e) {
 					System.err.println(p.getName() + ": Player exeeded allotted time!");
 					p.setExit(true);
 					task.cancel(true);
-				}
+				}*/
 
 				// Wait for all unfinished tasks for 2 secs
 				try{

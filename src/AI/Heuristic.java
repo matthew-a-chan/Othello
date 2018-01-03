@@ -46,10 +46,10 @@ public class Heuristic {
 			for(int c=0;c<8;c++) {
 				location.x=c;
 				location.y=r;
-				if(gs.getOwner(location)==null) {//If unowned
+				if(gs.getOwner(location).isEmpty()) {//If unowned
 					Inputs[8*r+c]=0;
 				}
-				else if(gs.getOwner(location)==thisPlayer) {//If owned by AI -- happy
+				else if(gs.getOwner(location).get(0).get(0)==thisPlayer) {//If owned by AI -- happy
 					Inputs[8*r+c]=1;
 				}
 				else {//If owned by non-AI -- sad
@@ -58,8 +58,10 @@ public class Heuristic {
 			}
 		}
 
-
-
+		//System.err.println(network.calculate(Inputs));
+		for(int i:Inputs) {
+		//	System.out.print(i+" ");
+		}
 		return network.calculate(Inputs);
 	}
 
