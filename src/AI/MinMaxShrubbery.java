@@ -17,8 +17,9 @@ public class MinMaxShrubbery
 		int depth=10;
 		m.to.setZ(0);
 		Integer player=0;
-		for(int i=0;i<gs.getPlayers().size();i++){
-			if(gs.getPlayer(i).getName().equals("A Random Walrus")){
+		for(int i=0;i<gs.numPlayers().length;i++){
+			if(gs.numPlayers()[i].getName().equals("A Random Walrus")) //find way to get names of players in a game
+			{
 				player=i;
 			}
 		}
