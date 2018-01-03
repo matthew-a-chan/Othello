@@ -11,6 +11,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import Genetics.Playground;
 import cabinet.GameState;
 
 public abstract class TurnBasedGame implements GameState{
@@ -266,6 +267,17 @@ public abstract class TurnBasedGame implements GameState{
 				playTurn();
 			}
 			
+			ArrayList<Player> activePlayers=new ArrayList<Player>();
+			
+			for( Team t : players ){
+				for(Player p : t) {
+					activePlayers.add(p);
+				}
+			}
+			if(getWinners().get(0).contains(activePlayers.get(0)))
+				Playground.gameComplete(activePlayers.get(0),activePlayers.get(1),true);
+			else
+				Playground.gameComplete(activePlayers.get(0), activePlayers.get(1), false);
 		}
-	}	
+	}
 }

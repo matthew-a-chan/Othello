@@ -224,12 +224,12 @@ public class Lobby extends Application {
 			ArrayList<PluginInfo> display = plugs.getCompatibleDisplays(selectedGame);
 			if( display != null && display.size() > 0 ){
 				try {
-					GameState state = selectedGame.newInstance();
-					GameDisplay disp = (GameDisplay) display.get(0).getPluginClass().newInstance();
+					GameState state = selectedGame.newInstance();//WOULD NEED TO MAKE ANOTHER ONE OF THESE FOR EACH GAME
+					GameDisplay disp = (GameDisplay) display.get(0).getPluginClass().newInstance();//THEN FILL IT WITH TWO AIS
 					
 					int spot = 0;
 					for( Class<Player> p : players ){
-						Player play = p.newInstance();
+						Player play = p.newInstance();//REPLACE THIS WITH OTHELLO AI.NEW INSTANCE()
 						play.setName( playerNames.get(spot).getText());
 						play.setDisplay(disp);
 						state.addPlayer(play);
@@ -255,7 +255,7 @@ public class Lobby extends Application {
 					});
 					
 					frame.show();
-					state.start();
+					state.start();//THEN FINALLY START IT -- IT WILL RETURN INFO UPON COMPLETION
 
 				} catch (InstantiationException e1) {
 					e1.printStackTrace();

@@ -11,7 +11,7 @@ import game.Player;
 
 public class Individual implements Comparable<Individual>{
 	
-	private double fitness=0;
+	private int fitness=0;
 	boolean[] results=new boolean[10];
 	File file;
 	
@@ -42,6 +42,10 @@ public class Individual implements Comparable<Individual>{
 		file=f;
 		player=new OthelloAI(file,this);
 		this.ID=ID;
+	}
+	
+	public int getFitness() {
+		return fitness;
 	}
 	
 	public File getFile() {

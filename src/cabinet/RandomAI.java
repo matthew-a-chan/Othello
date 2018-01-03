@@ -72,6 +72,8 @@ public class RandomAI extends Player{
 		for(int i=0;i<10000000;i++) {
 			Math.random();
 		}
-		m.add(gs.getValidMoves().get((int)(Math.random()*gs.getValidMoves().size())));
+		if(gs.getValidMoves().size()>0) {
+			m.add(gs.getValidMoves().get((int)(Math.random()*gs.getValidMoves().size())));
+		}
 	}
 }
