@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -57,14 +59,47 @@ public class Population {
 				String[] parent1Gene = new BufferedReader(new FileReader(parent1)).readLine().split(" ");
 				String[] parent2Gene = new BufferedReader(new FileReader(parent2)).readLine().split(" ");
 				
-				for(int k=0;k<parent1Gene.length;k++) {
+				DecimalFormat df = new DecimalFormat("#.###"); 
+				df.setRoundingMode(RoundingMode.CEILING);
+				
+				for(int k=0;k<parent1Gene.length;k++) 
+				{
 					
-					if(Math.random()<Playground.disruptiveMutationRate) {
-						//Disruptive mutation (If you want you can choose to erase more than one allele)
+					if(Math.random() < Playground.disruptiveMutationRate) 
+					{
+						//Disruptive mutation = random number from -10 to 10
+						
+							double randomGene = (double)Math.random() * 10;
+							if (Math.random() >= .5)
+							{
+								randomGene *= -1;
+							}
+							fw.write(df.format(randomGene));
+							fw.write(" ");
+						
 					}
-					
-					//This sums parent 1's and parent 2's alleles at k --- No mutations yet (Probably could just +- Playground.mutationRate*math random)
-					fw.write(Double.parseDouble(parent1Gene[k])+Double.parseDouble(parent2Gene[k])+" ");
+					else if (Math.random() < Playground.mutationRate) //pick one allele and change it by ±.2
+					{
+						double modifier = .2 * Math.random();
+						if (Math.random() >= .5)
+						{
+							modifier *= -1;
+						}
+						
+						if (Math.random() >= .5)
+						{
+							fw.write(Double.parseDouble(parent1Gene[k])+modifier + " ");
+						}
+						else
+						{
+							fw.write(Double.parseDouble(parent2Gene[k])+modifier + " ");
+						}		
+					}
+					else 
+					{
+						//This averages parent 1's and parent 2's alleles at k --- No mutations yet (Probably could just +- Playground.mutationRate*math random)
+						fw.write( (Double.parseDouble(parent1Gene[k])+Double.parseDouble(parent2Gene[k])) / 2 +" ");
+					}
 				}
 				fw.flush();
 			} catch (IOException e) {

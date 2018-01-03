@@ -1,7 +1,8 @@
 package AI;
 import java.util.ArrayList;
 import java.util.List;
-import gamecabinet.*;
+import cabinet.*;
+import game.Move;
 
 public class MaxNode {
 	ArrayList<MaxNode> child=new ArrayList<MaxNode>(0);
