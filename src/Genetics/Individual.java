@@ -10,6 +10,8 @@ public class Individual implements Comparable<Individual>{
 	
 	double fitness;
 	File file;
+	int wins;
+	int losses;
 	
 	
 	//Populations have individuals in them
@@ -48,6 +50,21 @@ public class Individual implements Comparable<Individual>{
 		return 0;
 	}
 	
+	public double calculateFitness() //simple calculation --> update pls :)
+	{
+		fitness = 5 * getWins() + -2 * getLosses();
+		return fitness;
+	}
+	
+	public int getWins()
+	{
+		return wins;
+	}
+	
+	public int getLosses()
+	{
+		return losses;
+	}
 	
 	
 	
