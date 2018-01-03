@@ -33,7 +33,7 @@ public class Heuristic {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String[] weights=s.split(",");
+		String[] weights=s.split(" ");
 		network=new Network();
 		network.train(weights);
 	}

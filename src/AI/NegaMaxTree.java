@@ -1,14 +1,14 @@
 package AI;
 import java.util.ArrayList;
 import java.util.List;
-import gamecabinet.*;
 
-public class MaxNode {
-	ArrayList<MaxNode> child=new ArrayList<MaxNode>(0);
-	Integer depth;
+import Genetics.Playground;
+import cabinet.*;
+import game.Move;
+
+public class NegaMaxTree {
+	
 	GameState gs;
-	Integer A;
-	Integer B;
 	Move move;
 	List<Move> moves;
 	Integer player;
@@ -16,21 +16,17 @@ public class MaxNode {
 	Double bestMove;
 	Heuristic h;
 
-	public MaxNode(GameState gs,Integer A,Integer B,Integer depth,Move move,Integer player, Integer color, Heuristic h){
+	public NegaMaxTree(GameState gs,Move move,Integer player, Heuristic h){
 		this.gs=gs;
-		this.A=A;
-		this.B=B;
-		this.depth=depth;
 		this.player=player;
-		this.color = color;
 		this.h = h;
-		makeMoves(gs, depth, color);
+		this.move=move;
+		makeMoves(gs, Playground.ply, Double.MIN_VALUE, Double.MAX_VALUE, 1);
 	}
 
-	public double makeMoves(GameState gs, Integer depth, Integer color)
+	public double makeMoves(GameState gs, Integer depth,double A,double B, Integer color)
 	{
-
-		if (depth == 0)
+		if (depth == 0 || gs.isGameOver())
 		{
 			return color * h.calculate(gs); //value
 		}
@@ -39,27 +35,20 @@ public class MaxNode {
 		bestMove = Double.MIN_VALUE;
 		while(!moves.isEmpty() && B>A) //modify beta and alpha values
 		{
-			Move move=moves.get(0);
-			moves.remove(0);
+			Move move=moves.remove(0);
 			GameState newgs=gs.copyInstance();
-			newgs.makeMove(move, move);
+			ArrayList<Move> moves=new ArrayList<Move>();
+			moves.add(move);
+			newgs.makeMove(moves);
 			
-			double m = -makeMoves(newgs, depth--, -color);
+			double m = -makeMoves(newgs, depth-1,-B,-A, -color);
 			
-			if (bestMove < m)
-			{
-				bestMove = m;
+			if(m>bestMove) {
+				bestMove=m;
+				this.move.to.x=move.to.x;
+				this.move.to.y=move.to.y;
 			}
-
-			/*
-				newgs.makeMove(move, move);
-				newNode=new MaxNode(newgs,A,B,depth-1,move,player, -color);
-				if(swap(newNode.getHeuristicValue()))
-				{
-					this.move=move;
-				}
-				child.add(newNode);
-			 */
+			A=Math.max(A, bestMove);
 		}
 		return bestMove;
 	}
