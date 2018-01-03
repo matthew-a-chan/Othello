@@ -236,7 +236,7 @@ public class Lobby extends Application {
 						spot++;
 					}					
 					
-					disp.init(state);
+					disp.init(state);//DISABLE disp TO REMOVE GUI
 					Stage frame = new Stage();
 					frame.setTitle("Game");
 					frame.setWidth(500);

@@ -312,7 +312,7 @@ public class OthelloGUI extends GameDisplayAdapter{
 
 		@Override
 		public void shutdown(GameState g) {
-
+			System.out.println("STOP FROM GUI");
 		}
 
 		@Override
@@ -361,18 +361,17 @@ public class OthelloGUI extends GameDisplayAdapter{
 		public OthelloGUIPiece() {
 			c = Color.GREEN;
 		}
-		public boolean setColor( Color c ){
-			this.c = (c == null) ? Color.GREEN : c;
+		public boolean setColor( Color c1 ){
+			this.c = (c1 == null) ? Color.GREEN : c1;
 
 			String style = "-fx-background-radius:50%;"+
 					"-fx-background-insets: 5px;"+
-					"-fx-border-color: black;"+
+					"-fx-border-color: white;"+
 					"-fx-border-width: 2px;";
 			String hex = String.format( "#%02X%02X%02X",
 					(int)( this.c.getRed() * 255 ),
 					(int)( this.c.getGreen() * 255 ),
 					(int)( this.c.getBlue() * 255 ) );
-
 			this.setStyle(style+"-fx-background-color:"+hex+";");
 			return true;
 		}

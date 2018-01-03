@@ -171,7 +171,6 @@ public abstract class TurnBasedGame implements GameState{
 	}
 	@Override
 	public void stop(){
-
 		if( thread != null ) {
 			thread.exit();
 			for( GameStateListener gsl : listeners ){
@@ -187,6 +186,7 @@ public abstract class TurnBasedGame implements GameState{
 	}
 	@Override
 	public void shutdown(){
+		System.out.println("STOP FROM TBG");
 		if( thread != null ) {
 			thread.exit();
 			thread.interrupt();
@@ -265,6 +265,7 @@ public abstract class TurnBasedGame implements GameState{
 			while( !isGameOver() && !exit ){
 				playTurn();
 			}
+			
 		}
 	}	
 }

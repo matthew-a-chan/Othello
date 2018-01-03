@@ -9,6 +9,15 @@ public class MinMaxShrubbery
 {
 
 	Heuristic a=null;
+	File file;
+	Player player;
+
+
+	public MinMaxShrubbery(File f,Player p) {
+		this.file=f;
+		this.player=p;
+		a=new Heuristic(file,player);
+	}
 
 
 	public void getMove(GameState gs,Move m)
@@ -21,10 +30,6 @@ public class MinMaxShrubbery
 			if(gs.getPlayer(i).getName().equals("A Random Walrus")){
 				player=i;
 			}
-		}
-
-		if(a==null) {
-			a=new Heuristic(gs.getPlayer(individual.getFile(),player));
 		}
 
 		MaxNode root=new MaxNode(gs, Integer.MIN_VALUE, Integer.MAX_VALUE, depth, move, player, 1, a);

@@ -2,13 +2,29 @@ package AI;
 import java.io.File;
 import java.util.List;
 
+import Genetics.Individual;
 import cabinet.GameState;
 import game.*;
 
 public class OthelloAI extends Player{
+	
 	File f;
+	Individual i=null;
 
-	MinMaxShrubbery MMtree=new MinMaxShrubbery();
+	MinMaxShrubbery MMtree;
+
+	public OthelloAI(File file) {
+		MMtree=new MinMaxShrubbery(file,(Player)this);
+	}
+	
+	public OthelloAI(File file,Individual indiv) {
+		this(file);
+		this.i=indiv;
+	}
+	
+	public Individual getIndividual() {
+		return i;
+	}
 
 	public boolean isHuman(){
 		return false;

@@ -6,10 +6,18 @@ package Genetics;
 
 import java.io.File;
 
+import AI.OthelloAI;
+import game.Player;
+
 public class Individual implements Comparable<Individual>{
 	
-	double fitness;
+	private double fitness=0;
+	boolean[] results=new boolean[10];
 	File file;
+	
+	private Player player;
+	
+	private int ID=0;
 	
 	
 	//Populations have individuals in them
@@ -30,14 +38,21 @@ public class Individual implements Comparable<Individual>{
 	 *
 	 * @param file
 	 */
-	public Individual(File f) {
+	public Individual(File f,int ID) {
 		file=f;
+		player=new OthelloAI(file,this);
+		this.ID=ID;
 	}
 	
 	public File getFile() {
 		return file;
 	}
-
+	
+	public void inputGameResult(Individual Other,boolean result) {//True = THIS won, False = Other won
+		results[Other.ID]=result;
+		if(result)
+			fitness++;
+	}
 
 	@Override
 	public int compareTo(Individual o) {
@@ -45,6 +60,8 @@ public class Individual implements Comparable<Individual>{
 			return 1;
 		if(this.fitness<o.fitness)
 			return -1;
+		if(results[o.ID])
+			return 1;
 		return 0;
 	}
 	

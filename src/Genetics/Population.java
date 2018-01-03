@@ -15,29 +15,17 @@ import java.io.IOException;
  *
  */
 public class Population {
-	
-	final int populationSize=10;
-	final double mutationRate=0.09;
-	int genNumber=0;
-	
+
+
 	Individual[] population;
-	
-	public static void main(String[] args) {
-		new Population();
+
+	public Population(int popSize) {
+		population=new Individual[popSize];
+
 	}
-	
-	public Population() {
-		
-		System.out.println(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"DATA");
-		File data=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"DATA");
-		
-		newGen();
-	}
-	
-	
-	
-	public void newGen() {
-		population=new Individual[populationSize];
+
+
+	public void newGen(int populationSize,int genNumber) {
 		File genFolder=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"GEN"+genNumber);
 		genFolder.mkdir();
 		for(int i=0;i<populationSize;i++) {
@@ -54,9 +42,9 @@ public class Population {
 			System.out.println(a.getAbsolutePath());
 			population[i]=new Individual(a);
 		}
-		
-		genNumber++;
 	}
-	
-	
+
+
+
+
 }
