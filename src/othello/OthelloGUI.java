@@ -268,7 +268,7 @@ public class OthelloGUI extends GameDisplayAdapter{
 			for( int i = 0; i < board.length; i++ ){
 				for( int j = 0; j < board[0].length; j++ ){
 					board[i][j].setDisable(true);
-					board[i][j].setColor(Color.GREEN);
+					//board[i][j].setColor(Color.GREEN);
 				}
 			}			
 		}
@@ -286,6 +286,7 @@ public class OthelloGUI extends GameDisplayAdapter{
 
 		@Override
 		public void moveMade(GameState g, List<Move> moves) {
+			
 			Platform.runLater(new Runnable() {
 				public void run() {
 					render(g);
