@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -48,7 +50,7 @@ public class Population {
 
 		try {
 			FileWriter fw = new FileWriter(newFile);
-						
+
 			if(p1.getAbsolutePath().equals(new File("").getAbsolutePath())) {
 
 				System.out.println("ELITISM");
@@ -63,7 +65,7 @@ public class Population {
 
 				String[] parent1Gene;
 				String[] parent2Gene;
-				
+
 				BufferedReader a1=new BufferedReader(new FileReader(p1));
 				BufferedReader a2=new BufferedReader(new FileReader(p2));
 
@@ -73,15 +75,47 @@ public class Population {
 
 				a1.close();
 				a2.close();
-				
+
 				for(int k=0;k<2730;k++) {//parent1Gene.length;k++) {
 
-					if(Math.random()<Playground.disruptiveMutationRate) {
-						//Disruptive mutation (If you want you can choose to erase more than one allele)
-					}
+					DecimalFormat df = new DecimalFormat("#.###"); 
+					df.setRoundingMode(RoundingMode.CEILING);
 
-					//This sums parent 1's and parent 2's alleles at k --- No mutations yet (Probably could just +- Playground.mutationRate*math random)
-					fw.write(Double.parseDouble(parent1Gene[k])+Double.parseDouble(parent2Gene[k])+" ");
+					if(Math.random() < Playground.disruptiveMutationRate) 
+					{
+						//Disruptive mutation = random number from -10 to 10
+
+						double randomGene = (double)Math.random() * 10;
+						if (Math.random() >= .5)
+						{
+							randomGene *= -1;
+						}
+						fw.write(df.format(randomGene));
+						fw.write(" ");
+
+					}
+					else if (Math.random() < Playground.mutationRate) //pick one allele and change it by ±.2
+					{
+						double modifier = .2 * Math.random();
+						if (Math.random() >= .5)
+						{
+							modifier *= -1;
+						}
+
+						if (Math.random() >= .5)
+						{
+							fw.write(Double.parseDouble(parent1Gene[k])+modifier + " ");
+						}
+						else
+						{
+							fw.write(Double.parseDouble(parent2Gene[k])+modifier + " ");
+						}		
+					}
+					else 
+					{
+						//This averages parent 1's and parent 2's alleles at k --- No mutations yet (Probably could just +- Playground.mutationRate*math random)
+						fw.write( (Double.parseDouble(parent1Gene[k])+Double.parseDouble(parent2Gene[k])) / 2 +" ");
+					}
 				}
 				fw.flush();
 			}
@@ -146,8 +180,8 @@ public class Population {
 	}
 
 
-/*  INIT CODE-- plz no mess with :D
- * 		System.out.println("WHY");
+	/*  INIT CODE-- plz no mess with :D
+	 * 		System.out.println("WHY");
 		int i=0;
 
 		FileWriter fw=null;
@@ -156,13 +190,13 @@ public class Population {
 			File newFile=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+
 					"AI"+File.separator+"GEN"+0+File.separator+"GEN"+0+"-IND"+i);
 			System.out.println(newFile.getAbsolutePath());
-			
+
 			fw = new FileWriter(newFile);
-			
+
 			for(int k=0;k<2730;k++) {
 
 				fw.write(Math.random()-1/2.0+" ");
-				
+
 			}
 
 			fw.flush();
@@ -186,7 +220,7 @@ public class Population {
 
 				BufferedReader a=new BufferedReader(new FileReader(f1));
 				System.out.println(fw);
-				
+
 				fw.write(a.readLine());
 				a.close();
 				fw.flush();
@@ -197,6 +231,6 @@ public class Population {
 
 
 		System.exit(0);
- */
+	 */
 
 }
