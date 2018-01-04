@@ -23,11 +23,18 @@ import cabinet.PluginManager;
 public class Playground {
 
 
-
-	static final int populationSize=64;
-	static final int matchesPlayed=16;
+	//Population
+	static final int populationSize=100;
+	static final int matchesPlayed=10;
+	
+	//Mutation
 	static final double mutationRate=0.01;
+	static final double mutationAmount=0.06;
 	static final double disruptiveMutationRate=.0005;
+	static final double range=1.0;
+	static final double regularization=0.99;
+	
+	//Evolution
 	static final int elitism=5;
 
 

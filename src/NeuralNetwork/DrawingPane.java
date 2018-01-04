@@ -24,7 +24,7 @@ public class DrawingPane extends JPanel{
 		Graphics2D g = (Graphics2D) g1;
 		
 		for(Connection a:network.Connections) {
-			a.draw(g);
+			//a.draw(g);
 		}
 		
 		repaint();

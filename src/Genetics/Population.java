@@ -85,7 +85,7 @@ public class Population {
 					{
 						//Disruptive mutation = random number from -10 to 10
 
-						double randomGene = (double)Math.random() * 10;
+						double randomGene = (double)Math.random() * Playground.range;
 						if (Math.random() >= .5)
 						{
 							randomGene *= -1;
@@ -94,9 +94,9 @@ public class Population {
 						fw.write(" ");
 
 					}
-					else if (Math.random() < Playground.mutationRate) //pick one allele and change it by ±.2
+					else if (Math.random() < Playground.mutationRate) //pick one allele and change it by +-Playground.mutationAmount
 					{
-						double modifier = .2 * Math.random();
+						double modifier = Playground.mutationAmount * Math.random();
 						if (Math.random() >= .5)
 						{
 							modifier *= -1;
@@ -114,7 +114,13 @@ public class Population {
 					else 
 					{
 						//This averages parent 1's and parent 2's alleles at k --- No mutations yet (Probably could just +- Playground.mutationRate*math random)
-						fw.write( (Double.parseDouble(parent1Gene[k])+Double.parseDouble(parent2Gene[k])) / 2 +" ");
+						double modifier = Playground.mutationAmount * Math.random();
+						if (Math.random() >= .5)
+						{
+							modifier *= -1;
+						}
+						
+						fw.write( (Double.parseDouble(parent1Gene[k])+Double.parseDouble(parent2Gene[k])) / 2 * Playground.regularization + modifier +" ");
 					}
 				}
 				fw.flush();
