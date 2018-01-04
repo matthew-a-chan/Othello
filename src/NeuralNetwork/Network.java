@@ -55,11 +55,11 @@ public class Network {
 
 		//Neurons=new Node[InputNeuronCount+HiddenNeuronCount*HiddenLayerCount+1];
 		Connections=new Connection[InputNeuronCount*HiddenNeuronCount+HiddenNeuronCount*HiddenNeuronCount*(HiddenLayerCount-1)+HiddenNeuronCount];
-
+		int count=0;
 		for(int i=0;i<InputNeuronCount;i++) {
 			for(int k=0;k<HiddenNeuronCount;k++) {
 				Connection connection=InputLayer[i].addConnection(HiddenLayers[0][k]);
-				Connections[connection.getID()]=connection;
+				Connections[count++]=connection;
 			//	System.out.println("ADDING CONNECTION "+connection.getID());
 			}
 		}
@@ -67,14 +67,14 @@ public class Network {
 			for(int k=0;k<HiddenNeuronCount;k++) {
 				for(int j=0;j<HiddenNeuronCount;j++) {
 					Connection connection=HiddenLayers[i][k].addConnection(HiddenLayers[i+1][j]);
-					Connections[connection.getID()]=connection;
+					Connections[count++]=connection;
 			//		System.out.println("ADDING CONNECTION "+connection.getID());
 				}
 			}
 		}
 		for(int i=0;i<HiddenNeuronCount;i++) {
 			Connection connection=HiddenLayers[HiddenLayerCount-1][i].addConnection(OutNode);
-			Connections[connection.getID()]=connection;
+			Connections[count++]=connection;
 			//System.out.println("ADDING CONNECTION "+connection.getID());
 		}
 	}

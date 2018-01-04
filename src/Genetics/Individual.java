@@ -12,7 +12,7 @@ import game.Player;
 public class Individual implements Comparable<Individual>{
 	
 	private int fitness=0;
-	boolean[] results=new boolean[10];
+	boolean[] results=new boolean[Playground.populationSize];
 	File file;
 	
 	private Player player;

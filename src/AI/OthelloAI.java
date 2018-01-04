@@ -10,6 +10,7 @@ public class OthelloAI extends Player{
 	
 	File f;
 	Individual i=null;
+	String name="DaOthelloAI";
 
 	MinMaxShrubbery MMtree;
 
@@ -31,7 +32,11 @@ public class OthelloAI extends Player{
 	}
 
 	public String getName(){
-		return "DaOthelloAI";
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name=name;
 	}
 	
 	public String getDescription(){
@@ -44,13 +49,48 @@ public class OthelloAI extends Player{
 
 	@Override
 	public void makeMove(GameState gs,List<Move> m){
+		if(gs.getValidMoves().size()==0) {
+			return;
+		}
 		Move move=null;
 		m.add(move=new Move());
 		MMtree.getMove(gs,move);
+		
+		//printGS(gs);
+		
 		if(move.to.x<0||move.to.y<0) {
-			move=gs.getValidMoves().get(0);
-			System.err.println("COULDNT SEARCH:: RANDOM MOVE");
+			move.to.x=gs.getValidMoves().get(0).to.x;
+			move.to.y=gs.getValidMoves().get(0).to.y;
+			//System.err.println("COULDNT SEARCH:: RANDOM MOVE--"+gs.isGameOver());
 		}
-		//return m.get(0);
+
 	}
+	
+	private void printGS(GameState gs) {
+		System.err.println("TEAM:"+gs.getPlayers()[0].contains(this));
+		System.out.println("MOVES AVAILABLE::"+gs.getValidMoves().size());
+		Location location=new Location();
+		for(int r=0;r<8;r++) {
+			for(int c=0;c<8;c++) {
+				location.x=c;
+				location.y=r;
+				if(gs.getOwner(location).isEmpty()) {//If unowned
+					System.out.print(0);
+				}
+				else if(gs.getOwner(location).get(0).get(0)==gs.getPlayers()[0].get(0)) {//If owned by AI -- happy
+					System.out.print("Y");
+				}
+				else {//If owned by non-AI -- sad
+					System.out.print("N");
+				}
+				System.out.print(" ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+	}
+	
 }

@@ -26,18 +26,12 @@ public class MinMaxShrubbery
 	{
 		Move move=new Move();
 		m.to.z=0;
-		Integer player=0;
-		for(int i=0;i<gs.getPlayers().length;i++){
-			if(gs.getPlayers()[i].get(0).getName().equals("A Random Walrus")){
-				player=i;
-			}
-		}
-
-		NegaMaxTree root=new NegaMaxTree(gs, move, player, NN);
+		
+		NegaMaxTree root=new NegaMaxTree(gs, move, NN);
 		//move=root.returnMove();
 		//System.err.println("X:"+move.to.x+" Y:"+move.to.y+" Z:"+move.to.z);
 		m.to.x=move.to.x;
 		m.to.y=move.to.y;
-		System.err.println("X:"+m.to.x+" Y:"+m.to.y+" Z:"+m.to.z);
+		//System.err.println("X:"+m.to.x+" Y:"+m.to.y+" Z:"+m.to.z);
 	}
 }

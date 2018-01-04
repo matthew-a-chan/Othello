@@ -56,7 +56,6 @@ public abstract class TurnBasedGame implements GameState{
 				ExecutorService exec = Executors.newFixedThreadPool(2);
 				Thread playerMove = new Thread() {
 					public void run() {
-						System.out.println(p.getClass());
 						p.makeMove(g, m);
 					}
 				};
@@ -66,7 +65,6 @@ public abstract class TurnBasedGame implements GameState{
 				try {
 					//if(p.getClass() == Player.class ){
 						task.get();
-						Thread.sleep(1000);
 					//}
 					//else {
 					//	task.get(7, TimeUnit.SECONDS);
@@ -276,6 +274,7 @@ public abstract class TurnBasedGame implements GameState{
 					activePlayers.add(p);
 				}
 			}
+			System.out.println("GAME FINISHED:"+activePlayers.get(0).getName()+":"+activePlayers.get(1).getName());
 			if(getWinners().get(0).contains(activePlayers.get(0)))
 				Playground.gameComplete(activePlayers.get(0),activePlayers.get(1),true);
 			else

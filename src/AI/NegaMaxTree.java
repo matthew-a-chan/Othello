@@ -10,45 +10,43 @@ public class NegaMaxTree {
 
 	GameState gs;
 	Move move;
-	List<Move> moves;
-	Integer player;
 	Integer color; //1 for AI -1 for opponent
 	//Double bestMove;
 	Heuristic h;
 
-	public NegaMaxTree(GameState gs,Move move,Integer player, Heuristic h){
+	public NegaMaxTree(GameState gs,Move move, Heuristic h){
 		this.gs=gs;
-		this.player=player;
 		this.h = h;
 		this.move=move;
-		makeMoves(gs, 3, Double.MIN_VALUE, Double.MAX_VALUE, 1,true);
+		makeMoves(gs, Playground.ply, Double.MIN_VALUE, Double.MAX_VALUE, 1,true);
 	}
 
 	public double makeMoves(GameState gs, Integer depth,double A,double B, Integer color,boolean isRoot)
 	{
-		System.out.println(isRoot);
+		//System.out.println(depth);
 		if (depth == 0 || gs.isGameOver())
 		{
 			return color * h.calculate(gs); //value
 		}
 
-		moves=gs.getValidMoves();
+		List<Move> moves=gs.getValidMoves();
 		double bestMove = -1000000000.0;
 		while(!moves.isEmpty()) //modify beta and alpha values
 		{
 			Move move=moves.remove(0);
 			GameState newgs=gs.copyInstance();
-			ArrayList<Move> moves=new ArrayList<Move>();
-			moves.add(move);
-			newgs.makeMove(moves);
+			ArrayList<Move> actionMoves=new ArrayList<Move>();
+			actionMoves.add(move);
+			newgs.makeMove(actionMoves);
 
 			double m = -makeMoves(newgs, depth-1,-B,-A, -color,false);
 
 			if(m>bestMove) {
-				System.out.println("BEST MOVE YET"+move.to.x+"::"+move.to.y+"::"+isRoot);
 				bestMove=m;
 				if(isRoot) {
-					System.err.println("CHANGING");
+					//System.out.println("BEST MOVE YET"+move.to.x+"::"+move.to.y+"::"+isRoot);
+
+					//System.err.println("CHANGING");
 					this.move.to.x=move.to.x;
 					this.move.to.y=move.to.y;
 				}
@@ -66,6 +64,16 @@ public class NegaMaxTree {
 	{
 		return move;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/*
 	public boolean swap(Integer A){

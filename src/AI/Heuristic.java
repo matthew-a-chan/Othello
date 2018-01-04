@@ -31,6 +31,7 @@ public class Heuristic {
 			r = new BufferedReader(new FileReader(f));
 			s=r.readLine();
 		} catch (IOException e) {
+			System.out.println(f.getAbsolutePath());
 			e.printStackTrace();
 		}
 		String[] weights=s.split(" ");
