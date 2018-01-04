@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import Genetics.Individual;
 import cabinet.GameDisplay;
 import cabinet.GameState;
 import cabinet.Plugin;
@@ -158,5 +159,10 @@ public class Player implements Plugin{
 			}
 			return false;
 		}
+	}
+
+	public Individual getIndividual() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

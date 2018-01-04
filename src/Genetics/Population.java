@@ -34,7 +34,7 @@ public class Population {
 	private void init() {
 		for(int i=0;i<Playground.populationSize;i++) {
 			addIndividual(new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+
-					"AI"+File.separator+"GEN"+genNumber+File.separator+"GEN"+genNumber+"-IND"+i),i);
+					"AI"+File.separator+"GEN"+genNumber+File.separator+"GEN"+genNumber+"-IND"+i+".txt"),i);
 		}
 	}
 
@@ -46,7 +46,7 @@ public class Population {
 	private void makeChild(File p1,File p2,int ID) {
 
 		File newFile=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+
-				"AI"+File.separator+"GEN"+(genNumber+1)+File.separator+"GEN"+(genNumber+1)+"-IND"+ID);
+				"AI"+File.separator+"GEN"+(genNumber+1)+File.separator+"GEN"+(genNumber+1)+"-IND"+ID+".txt");
 
 		try {
 			FileWriter fw = new FileWriter(newFile);
@@ -138,12 +138,12 @@ public class Population {
 		genFolder.mkdir();
 
 		Collections.sort(population);
-		for(Individual a:population) {
-			System.out.print(a.getFitness()+" : ");
+		for(int i=0;i<Playground.populationSize;i++) {
+			System.out.print(population.get(i).getFitness()+" : ");
 		}
 		System.out.println();
-		for(Individual a:population) {
-			System.out.print(a.getPlayer().getName()+" : ");
+		for(int i=0;i<Playground.populationSize;i++) {
+			System.out.print(population.get(i).getPlayer().getName()+" : ");
 		}
 		System.out.println();
 

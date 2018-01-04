@@ -5,22 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 
 import game.Player;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import othello.Othello;
-import othello.OthelloGUI;
-import AI.OthelloAI;
-import cabinet.GameDisplay;
 import cabinet.GameState;
-import cabinet.PluginInfo;
-import cabinet.PluginManager;
-import cabinet.RandomAI;
+
 
 public class Playground {
 
@@ -28,7 +18,7 @@ public class Playground {
 	//Population
 	static final int populationSize=100;
 	static final int matchesPlayed=10;
-	static final double AICutoff=0.67;
+	static final double AICutoff=0.50;
 
 	//Mutation
 	static final double mutationRate=0.01;
@@ -40,6 +30,7 @@ public class Playground {
 	//Evolution
 	static final int elitism=5;
 
+	private final int refresh=40;
 
 	public static final int ply=4;
 	int genNumber=0;
@@ -74,7 +65,7 @@ public class Playground {
 
 		for(int i=0;i<10;i++) {
 			Match();
-			while(gamesComplete<populationSize*matchesPlayed-1) {try {Thread.sleep(10);} catch (InterruptedException e) {}}
+			while(gamesComplete<populationSize*matchesPlayed-1) {try {Thread.sleep(refresh);} catch (InterruptedException e) {}}
 			if(genNumber%3==0) {
 				System.out.println("BENCH TEST");
 				benchTest();
@@ -88,11 +79,11 @@ public class Playground {
 	public void Match() {
 		for(int i=0;i<populationSize;i++) {
 			int startGamesComplete=gamesComplete;
-			for(int k=1;k<=matchesPlayed;k++) {
-				runGame(currentPop.population.get(i),currentPop.population.get((i+k)%populationSize));
+			for(int k=1;k<=matchesPlayed;k+=1) { //---------------------------------------------------------
+				runGame(currentPop.population.get(i),currentPop.population.get((i+k*5)%populationSize));
 			}
 			while(gamesComplete<startGamesComplete+matchesPlayed) 
-			{try {Thread.sleep(10);} catch (InterruptedException e) {}}
+			{try {Thread.sleep(refresh);} catch (InterruptedException e) {}}
 			System.out.println("FITNESS "+currentPop.population.get(i).getPlayer().getName()+":"+currentPop.population.get(i).getFitness());
 		}
 	}
@@ -101,37 +92,37 @@ public class Playground {
 		gamesComplete=0;
 		Collections.sort(currentPop.population);
 		for(int i=0;i<50;i++) {
-			runGame(currentPop.population.get(0),new RandomIndividual());
-			runGame(new RandomIndividual(),currentPop.population.get(0));
+			runGame(currentPop.population.get(0),new Individual());
+			runGame(new Individual(),currentPop.population.get(0));
 		}
-		while(gamesComplete<99){
-			{try {Thread.sleep(10);} catch (InterruptedException e) {}}
-			FileWriter fr;
-			try {
-				fr = new FileWriter(new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"BenchTest"+genNumber));
-				fr.write(currentPop.population.get(0).getFitness()+"");
-				fr.flush();
-				fr.close();
-			} catch (IOException e) {e.printStackTrace();}
-			currentPop.population.get(0).resetFitness();
-		}
+		while(gamesComplete<99)
+		{try {Thread.sleep(10);} catch (InterruptedException e) {}}
+		FileWriter fr;
+		try {
+			fr = new FileWriter(new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"BenchTest"+genNumber+".txt"));
+			fr.write(currentPop.population.get(0).getFitness()+"");
+			fr.flush();
+			fr.close();
+		} catch (IOException e) {e.printStackTrace();}
+		currentPop.population.get(0).resetFitness();
+
 	}
 
 	public void runGame(Individual i1,Individual i2) {
 		GameState state = new Othello();//WOULD NEED TO MAKE ANOTHER ONE OF THESE FOR EACH GAME
 
-		OthelloAI player1=(OthelloAI) i1.getPlayer();
+		Player player1=i1.getPlayer();
 		state.addPlayer(player1);
 
-		OthelloAI player2=(OthelloAI) i2.getPlayer();
+		Player player2=i2.getPlayer();
 		state.addPlayer(player2);
 
 		state.start();//THEN FINALLY START IT -- IT WILL RETURN INFO UPON COMPLETION
 	}		
 
 	public static void gameComplete(Player player1, Player player2, boolean winner) { //True = player1 Wins, False = player2 Wins
-		((OthelloAI)player1).getIndividual().inputGameResult(((OthelloAI)player2).getIndividual(),winner);
-		((OthelloAI)player2).getIndividual().inputGameResult(((OthelloAI)player1).getIndividual(),!winner);
+		player1.getIndividual().inputGameResult(player2.getIndividual(),winner);
+		player2.getIndividual().inputGameResult(player1.getIndividual(),!winner);
 		if(winner) {
 			//System.out.println(player1.getName());
 		}

@@ -10,7 +10,7 @@ public class Gen0Init {
 
 		for(int i=0;i<Playground.populationSize;i++){
 			File newFile=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+
-					"AI"+File.separator+"GEN0"+File.separator+"GEN0"+"-IND"+i);
+					"AI"+File.separator+"GEN0"+File.separator+"GEN0"+"-IND"+i+".txt");
 
 			try {
 				FileWriter fw = new FileWriter(newFile);

@@ -13,6 +13,8 @@ public class OthelloAI extends Player{
 	String name="DaOthelloAI";
 
 	MinMaxShrubbery MMtree;
+	
+	public OthelloAI() {}
 
 	public OthelloAI(File file) {
 		MMtree=new MinMaxShrubbery(file,(Player)this);
