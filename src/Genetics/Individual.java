@@ -15,7 +15,7 @@ public class Individual implements Comparable<Individual>{
 	boolean[] results=new boolean[Playground.populationSize];
 	File file;
 	
-	private Player player;
+	protected Player player;
 	
 	private int ID=0;
 	
@@ -44,12 +44,18 @@ public class Individual implements Comparable<Individual>{
 		this.ID=ID;
 	}
 	
+	public Individual() {}
+	
 	public Player getPlayer() {
 		return player;
 	}
 	
 	public int getFitness() {
 		return fitness;
+	}
+	
+	public void resetFitness() {
+		fitness=0;
 	}
 	
 	public File getFile() {

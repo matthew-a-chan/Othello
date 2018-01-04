@@ -138,6 +138,15 @@ public class Population {
 		genFolder.mkdir();
 
 		Collections.sort(population);
+		for(Individual a:population) {
+			System.out.print(a.getFitness()+" : ");
+		}
+		System.out.println();
+		for(Individual a:population) {
+			System.out.print(a.getPlayer().getName()+" : ");
+		}
+		System.out.println();
+
 
 		int i=0;
 		for(;i<Playground.elitism;i++) {
@@ -148,20 +157,19 @@ public class Population {
 
 
 		for(;i<Playground.populationSize;i++) {
-			int d=(int)(Math.random()*Playground.populationSize*(Playground.populationSize-1)/2);
-			File parent1=whichIndividual(d).file;
-			d=(int)(Math.random()*Playground.populationSize*(Playground.populationSize-1)/2);
-			File parent2=whichIndividual(d).file;
+			File parent1=whichIndividual().file;
+			File parent2=whichIndividual().file;
 
 			makeChild(parent1,parent2,i);
 		}
 	}
 
 
-	private Individual whichIndividual(int d)
+	private Individual whichIndividual()
 	{
+		int d=(int)(Math.random()*Playground.populationSize*Playground.matchesPlayed);
+
 		double upperbound = population.get(0).getFitness();
-		double lowerbound = 0;
 
 		if (d < upperbound)
 		{
@@ -170,17 +178,16 @@ public class Population {
 		//else...darn
 		for (int i = 1; i < Playground.populationSize; i++)
 		{
-			lowerbound = upperbound;
-			upperbound += population.get(i).getFitness();
+			upperbound += population.get(i%((int)(Playground.populationSize*Playground.AICutoff))).getFitness();
 
 			if (d < upperbound)
 			{
-				return population.get(i);
+				return population.get(i%((int)(Playground.populationSize*Playground.AICutoff)));
 			}
 		}
 
 		System.err.println("REALLY BAD THINGS ARE HAPPENING");
-		System.err.println("IN Individual.whichIndividual() -- PLZ FIX");
+		System.err.println("In Individual.whichIndividual() -- PLZ FIX");
 
 		return population.get(0); //hopefully doesn't get here
 	}
