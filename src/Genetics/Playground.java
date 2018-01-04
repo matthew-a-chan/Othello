@@ -24,8 +24,8 @@ public class Playground {
 
 
 
-	static final int populationSize=100;
-	static final int matchesPlayed=25;
+	static final int populationSize=64;
+	static final int matchesPlayed=16;
 	static final double mutationRate=0.01;
 	static final double disruptiveMutationRate=.0005;
 	static final int elitism=5;
@@ -79,6 +79,7 @@ public class Playground {
 			}
 			while(gamesComplete<startGamesComplete+matchesPlayed) 
 				{try {Thread.sleep(10);} catch (InterruptedException e) {}}
+			System.out.println("FITNESS "+currentPop.population.get(i).getPlayer().getName()+":"+currentPop.population.get(i).getFitness());
 		}
 	}
 
@@ -98,12 +99,12 @@ public class Playground {
 		((OthelloAI)player1).getIndividual().inputGameResult(((OthelloAI)player2).getIndividual(),winner);
 		((OthelloAI)player2).getIndividual().inputGameResult(((OthelloAI)player1).getIndividual(),!winner);
 		if(winner) {
-			System.out.println(player1.getName());
+			//System.out.println(player1.getName());
 		}
 		else {
-			System.out.println(player2.getName());
+			//System.out.println(player2.getName());
 		}
-		System.out.println(gamesComplete);
+		//System.out.println(gamesComplete);
 		gamesComplete++;
 	}
 
@@ -118,6 +119,15 @@ public class Playground {
 
 		currentPop.newGen();
 		currentPop=new Population(genNumber);
+		
+		File data=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"DATA.txt");
+		FileWriter fr;
+		try {
+			fr = new FileWriter(data);
+			fr.write(genNumber+"");
+			fr.flush();
+			fr.close();} 
+		catch (IOException e) {e.printStackTrace();}
 
 
 	}

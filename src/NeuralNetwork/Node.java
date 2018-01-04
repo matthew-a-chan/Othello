@@ -20,7 +20,7 @@ public class Node {
 	}
 	
 	public Connection addConnection(Node other) {
-		Connection connection=new Connection(this,other);
+		Connection connection=new Connection(other);
 		outConnections[currentConnection]=connection;
 		currentConnection++;
 		return connection;
@@ -31,8 +31,8 @@ public class Node {
 	}
 	
 	public void propagate() {
-		for(Connection out:outConnections) {
-			out.calculateConnection(value);
+		for(int i=0;i<outConnections.length;i++){//for(Connection out:outConnections) 
+			outConnections[i].calculateConnection(value);
 		}
 	}
 
@@ -46,6 +46,6 @@ public class Node {
 	
 	
 	
-	public int x;
-	public int y;
+	//public int x;
+	//public int y;
 }

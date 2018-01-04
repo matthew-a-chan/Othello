@@ -25,8 +25,8 @@ public class Network {
 		//Input -> Hidden
 		for(int i=0;i<InputNeuronCount;i++) {
 			InputLayer[i]=new Node(HiddenNeuronCount);
-			InputLayer[i].x=100;
-			InputLayer[i].y=50+i*900/InputNeuronCount;
+			//InputLayer[i].x=100;
+			//InputLayer[i].y=50+i*900/InputNeuronCount;
 		}
 
 		HiddenLayers=new Node[HiddenLayerCount][HiddenNeuronCount];
@@ -35,22 +35,22 @@ public class Network {
 		for(int k=0;k<HiddenLayerCount-1;k++) {
 			for(int i=0;i<HiddenNeuronCount;i++) {
 				HiddenLayers[k][i]=new Node(HiddenNeuronCount);
-				HiddenLayers[k][i].x=700;
-				HiddenLayers[k][i].y=100+i*800/HiddenNeuronCount;
+				//HiddenLayers[k][i].x=700;
+				//HiddenLayers[k][i].y=100+i*800/HiddenNeuronCount;
 			}
 		}
 
 		//Last Hidden -> Output
 		for(int i=0;i<HiddenNeuronCount;i++) {
 			HiddenLayers[HiddenLayerCount-1][i]=new Node(1);
-			HiddenLayers[HiddenLayerCount-1][i].x=950;
-			HiddenLayers[HiddenLayerCount-1][i].y=100+i*800/HiddenNeuronCount;
+			//HiddenLayers[HiddenLayerCount-1][i].x=950;
+			//HiddenLayers[HiddenLayerCount-1][i].y=100+i*800/HiddenNeuronCount;
 		}
 
 
 		OutNode=new Node(0);
-		OutNode.x=1400;
-		OutNode.y=500;
+		//OutNode.x=1400;
+		//OutNode.y=500;
 
 
 		//Neurons=new Node[InputNeuronCount+HiddenNeuronCount*HiddenLayerCount+1];

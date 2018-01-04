@@ -16,15 +16,12 @@ import java.awt.Graphics2D;
  */
 public class Connection {
 
-	private Node inputNode;
 	private Node outputNode;
 
 	private double weight=0;
 
-	public Connection(Node input,Node output) {
-		inputNode=input;
+	public Connection(Node output) {
 		outputNode=output;
-		weight=Math.random()-0.5;
 	}
 
 	public void calculateConnection(double input){
@@ -41,7 +38,7 @@ public class Connection {
 	
 	
 	
-	public void draw(Graphics2D g) {
+	/*public void draw(Graphics2D g) {
 		if(weight>0.4) {
 			g.setColor(Color.GREEN);
 			g.drawLine(inputNode.x, inputNode.y, outputNode.x, outputNode.y);
@@ -55,6 +52,6 @@ public class Connection {
 		else {
 			//g.setColor(Color.BLACK);
 		}
-	}
-
+	}*/
+	
 }
