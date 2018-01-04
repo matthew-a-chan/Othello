@@ -20,6 +20,13 @@ public class NegaMaxTree {
 		this.move=move;
 		makeMoves(gs, Playground.ply, Double.MIN_VALUE, Double.MAX_VALUE, 1,true);
 	}
+	
+	public NegaMaxTree(GameState gs,int ply, Move move, Heuristic h){
+		this.gs=gs;
+		this.h = h;
+		this.move=move;
+		makeMoves(gs, ply, Double.MIN_VALUE, Double.MAX_VALUE, 1,true);
+	}
 
 	public double makeMoves(GameState gs, Integer depth,double A,double B, Integer color,boolean isRoot)
 	{
