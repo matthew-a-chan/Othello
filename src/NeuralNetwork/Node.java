@@ -9,8 +9,6 @@ package NeuralNetwork;
  */
 public class Node {
 	
-	private static int count=0;
-	private int ID;
 	
 	private double value;//THIS VALUE IS PREREGULATED (Sum of the TanH of all inputs, often > 1 -- Is TanH in Connection.calculate
 	
@@ -18,12 +16,11 @@ public class Node {
 	public Connection[] outConnections;
 	
 	public Node(int ConnectionNumber) {
-		ID=count++;
 		outConnections=new Connection[ConnectionNumber];
 	}
 	
 	public Connection addConnection(Node other) {
-		Connection connection=new Connection(this,other);
+		Connection connection=new Connection(other);
 		outConnections[currentConnection]=connection;
 		currentConnection++;
 		return connection;
@@ -34,9 +31,8 @@ public class Node {
 	}
 	
 	public void propagate() {
-		System.out.println(ID+"::"+value);
-		for(Connection out:outConnections) {
-			out.calculateConnection(value);
+		for(int i=0;i<outConnections.length;i++){//for(Connection out:outConnections) 
+			outConnections[i].calculateConnection(value);
 		}
 	}
 
@@ -50,6 +46,6 @@ public class Node {
 	
 	
 	
-	public int x;
-	public int y;
+	//public int x;
+	//public int y;
 }

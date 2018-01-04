@@ -6,16 +6,17 @@ package Genetics;
 
 import java.io.File;
 
+import AI.BenchmarkAI;
 import AI.OthelloAI;
 import game.Player;
 
 public class Individual implements Comparable<Individual>{
 	
 	private int fitness=0;
-	boolean[] results=new boolean[10];
+	boolean[] results=new boolean[Playground.populationSize];
 	File file;
 	
-	private Player player;
+	protected Player player;
 	
 	private int ID=0;
 	
@@ -44,8 +45,20 @@ public class Individual implements Comparable<Individual>{
 		this.ID=ID;
 	}
 	
+	public Individual() {
+		player=new BenchmarkAI(this);
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
 	public int getFitness() {
 		return fitness;
+	}
+	
+	public void resetFitness() {
+		fitness=0;
 	}
 	
 	public File getFile() {
@@ -61,11 +74,11 @@ public class Individual implements Comparable<Individual>{
 	@Override
 	public int compareTo(Individual o) {
 		if(this.fitness>o.fitness)
-			return 1;
-		if(this.fitness<o.fitness)
 			return -1;
-		if(results[o.ID])
+		if(this.fitness<o.fitness)
 			return 1;
+		if(results[o.ID])
+			return -1;
 		return 0;
 	}
 	

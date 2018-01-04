@@ -1,6 +1,8 @@
 package AI;
 import java.io.File;
 
+import com.sun.corba.se.spi.ior.MakeImmutable;
+
 import cabinet.GameState;
 import game.*;
 import game.Move;
@@ -8,36 +10,41 @@ import game.Move;
 public class MinMaxShrubbery
 {
 
-	Heuristic a=null;
+	Heuristic NN=null;
 	File file;
 	Player player;
+	private boolean isEvolving;
 
 
 	public MinMaxShrubbery(File f,Player p) {
 		this.file=f;
 		this.player=p;
-		a=new Heuristic(file,player);
+		isEvolving=true;
+		NN=new Heuristic(file,player);
+	}
+
+	public MinMaxShrubbery(Player p) {
+		this.player=p;
+		isEvolving=false;
+		NN=new Heuristic(player);
 	}
 
 
 	public void getMove(GameState gs,Move m)
 	{
 		Move move=new Move();
-		int depth=10;
-		m.setZ(0);
-		Integer player=0;
-		for(int i=0;i<gs.getPlayers().size();i++){
-			if(gs.getPlayer(i).getName().equals("A Random Walrus")){
-				player=i;
-			}
+		m.to.z=0;
+
+		if(isEvolving) {
+			NegaMaxTree root=new NegaMaxTree(gs,move,NN);
 		}
-
-		MaxNode root=new MaxNode(gs, Integer.MIN_VALUE, Integer.MAX_VALUE, depth, move, player, 1, a);
-		//root.setDepth(depth);
-		move=root.returnMove();
-		System.err.println("Depth:"+depth+" X:"+move.getX()+" Y:"+move.getY()+" Z:"+move.getZ());
-		m.setX(move.getX());
-		m.setY(move.getY());
-
+		else {
+			NegaMaxTree root=new NegaMaxTree(gs, 5, move, NN);
+		}
+		//move=root.returnMove();
+		//System.err.println("X:"+move.to.x+" Y:"+move.to.y+" Z:"+move.to.z);
+		m.to.x=move.to.x;
+		m.to.y=move.to.y;
+		//System.err.println("X:"+m.to.x+" Y:"+m.to.y+" Z:"+m.to.z);
 	}
 }
