@@ -11,7 +11,6 @@ import game.Player;
 public class BenchmarkAI extends OthelloAI{
 
 	public BenchmarkAI(Individual individual) {
-		super();
 		this.i=individual;
 	}
 	

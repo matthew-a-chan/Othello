@@ -39,7 +39,7 @@ public class MinMaxShrubbery
 			NegaMaxTree root=new NegaMaxTree(gs,move,NN);
 		}
 		else {
-			NegaMaxTree root=new NegaMaxTree(gs, 5, move, NN);
+			NegaMaxTree root=new NegaMaxTree(gs, 6, move, NN);
 		}
 		//move=root.returnMove();
 		//System.err.println("X:"+move.to.x+" Y:"+move.to.y+" Z:"+move.to.z);

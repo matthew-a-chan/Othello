@@ -57,8 +57,8 @@ public class Individual implements Comparable<Individual>{
 		return fitness;
 	}
 	
-	public void resetFitness() {
-		fitness=0;
+	public void resetFitness(int fitness) {
+		this.fitness=fitness;
 	}
 	
 	public File getFile() {

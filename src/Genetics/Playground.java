@@ -22,7 +22,7 @@ public class Playground {
 
 	//Mutation
 	static final double mutationRate=0.01;
-	static final double mutationAmount=0.06;
+	static final double mutationAmount=0.1;
 	static final double disruptiveMutationRate=.0005;
 	static final double range=1.0;
 	static final double regularization=0.99;
@@ -63,10 +63,10 @@ public class Playground {
 
 		currentPop=new Population(genNumber);
 
-		for(int i=0;i<10;i++) {
+		for(int i=0;i<1000;i++) {
 			Match();
 			while(gamesComplete<populationSize*matchesPlayed-1) {try {Thread.sleep(refresh);} catch (InterruptedException e) {}}
-			if(genNumber%3==0) {
+			if(genNumber%1==0) {
 				System.out.println("BENCH TEST");
 				benchTest();
 			}
@@ -91,9 +91,12 @@ public class Playground {
 	public void benchTest() {
 		gamesComplete=0;
 		Collections.sort(currentPop.population);
+		int fitness=currentPop.population.get(0).getFitness();
+		Individual a=new Individual();
+		System.out.println(currentPop.population.get(0).player.getName()+":::"+currentPop.population.get(0).getFitness());
 		for(int i=0;i<50;i++) {
-			runGame(currentPop.population.get(0),new Individual());
-			runGame(new Individual(),currentPop.population.get(0));
+			runGame(currentPop.population.get(0),a);
+			runGame(a,currentPop.population.get(0));
 		}
 		while(gamesComplete<99)
 		{try {Thread.sleep(10);} catch (InterruptedException e) {}}
@@ -101,10 +104,11 @@ public class Playground {
 		try {
 			fr = new FileWriter(new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"BenchTest"+genNumber+".txt"));
 			fr.write(currentPop.population.get(0).getFitness()+"");
+			fr.write("\n"+currentPop.population.get(0).player.getName());
 			fr.flush();
 			fr.close();
 		} catch (IOException e) {e.printStackTrace();}
-		currentPop.population.get(0).resetFitness();
+		currentPop.population.get(0).resetFitness(fitness);
 
 	}
 
