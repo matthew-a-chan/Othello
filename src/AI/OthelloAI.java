@@ -4,6 +4,8 @@ import java.util.List;
 
 import Genetics.Individual;
 import cabinet.GameState;
+import cabinet.Plugin;
+import cabinet.PluginInfo;
 import game.*;
 
 public class OthelloAI extends Player{
@@ -14,7 +16,36 @@ public class OthelloAI extends Player{
 
 	MinMaxShrubbery MMtree;
 	
-	public OthelloAI() {}
+	public static PluginInfo getInfo() {
+		PluginInfo pi = new PluginInfo() {
+
+			@Override
+			public String name() {
+				return "OthelloAI";
+			}
+
+			@Override
+			public String description() {
+				return "An AI for Othello";
+			}
+
+			@Override
+			public Class<? extends Plugin> type() {
+				return Player.class;
+			}
+
+			@Override
+			public List<Class<? extends GameState>> supportedGames() {
+				return null;
+			}
+			
+		};
+		return pi;
+	}
+	
+	public OthelloAI() {
+		MMtree=new MinMaxShrubbery(this);
+	}
 
 	public OthelloAI(File file) {
 		MMtree=new MinMaxShrubbery(file,(Player)this);
@@ -29,24 +60,12 @@ public class OthelloAI extends Player{
 		return i;
 	}
 
-	public boolean isHuman(){
-		return false;
-	}
-
 	public String getName(){
 		return name;
 	}
 	
 	public void setName(String name) {
 		this.name=name;
-	}
-	
-	public String getDescription(){
-		return "This is probably not going to work";
-	}
-
-	public String getType(){
-		return "AI";
 	}
 
 	@Override

@@ -13,12 +13,20 @@ public class MinMaxShrubbery
 	Heuristic NN=null;
 	File file;
 	Player player;
+	private boolean isEvolving;
 
 
 	public MinMaxShrubbery(File f,Player p) {
 		this.file=f;
 		this.player=p;
+		isEvolving=true;
 		NN=new Heuristic(file,player);
+	}
+
+	public MinMaxShrubbery(Player p) {
+		this.player=p;
+		isEvolving=false;
+		NN=new Heuristic(player);
 	}
 
 
@@ -26,8 +34,13 @@ public class MinMaxShrubbery
 	{
 		Move move=new Move();
 		m.to.z=0;
-		
-		NegaMaxTree root=new NegaMaxTree(gs, move, NN);
+
+		if(isEvolving) {
+			NegaMaxTree root=new NegaMaxTree(gs,move,NN);
+		}
+		else {
+			NegaMaxTree root=new NegaMaxTree(gs, 5, move, NN);
+		}
 		//move=root.returnMove();
 		//System.err.println("X:"+move.to.x+" Y:"+move.to.y+" Z:"+move.to.z);
 		m.to.x=move.to.x;

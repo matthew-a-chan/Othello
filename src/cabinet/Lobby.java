@@ -240,7 +240,7 @@ public class Lobby extends Application {
 					Stage frame = new Stage();
 					frame.setTitle("Game");
 					frame.setWidth(500);
-					frame.setHeight(500);
+					frame.setHeight(550);
 					
 					Scene root = disp.getGraphic();
 					frame.setScene(root);
