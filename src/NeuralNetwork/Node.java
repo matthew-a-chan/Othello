@@ -1,11 +1,9 @@
-/**
- * @author Stephen C.
- */
+
 package NeuralNetwork;
 
 /**
- * @author Stephen C.
- *
+ * @author Stephen C. & Jon Wu
+ * a node (Input, Hidden, Output) in the neural network
  */
 public class Node {
 	
@@ -19,6 +17,9 @@ public class Node {
 		outConnections=new Connection[ConnectionNumber];
 	}
 	
+	/*
+	 * connects this node to the parameter other, other being the output node
+	 */
 	public Connection addConnection(Node other) {
 		Connection connection=new Connection(other);
 		outConnections[currentConnection]=connection;
@@ -30,6 +31,9 @@ public class Node {
 		value+=addend;
 	}
 	
+	/*
+	 * sums up all the values from the input nodes to a hidden node, or the hidden nodes to an output node
+	 */
 	public void propagate() {
 		for(int i=0;i<outConnections.length;i++){//for(Connection out:outConnections) 
 			outConnections[i].calculateConnection(value);

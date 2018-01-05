@@ -3,6 +3,10 @@
  */
 package NeuralNetwork;
 
+/**
+ * the neural network (NN) used to calculate the value of a specific gamestate
+ *
+ */
 public class Network {
 
 	final int InputNeuronCount=64;
@@ -19,6 +23,9 @@ public class Network {
 
 
 
+	/*
+	 * creates the neural network and all the connections between input nodes to hidden nodes, and hidden nodes to output nodes
+	 */
 	public Network() {
 		InputLayer=new Node[InputNeuronCount];
 
@@ -79,12 +86,18 @@ public class Network {
 		}
 	}
 
+	/*
+	 * sets the weights for all connections in the NN
+	 */
 	public void train(String[] weights) {
 		for(int i=0;i<Connections.length;i++) {
 			Connections[i].setWeight(Double.parseDouble(weights[i]));
 		}
 	}
 
+	/*
+	 * returns the final value of a specific gamestate
+	 */
 	public double calculate(int[] Inputs) {
 
 		//Input -> Hidden

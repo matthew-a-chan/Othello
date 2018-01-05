@@ -1,18 +1,11 @@
-/**
-
- * @author Stephen C.
- * 
- * new comment here!
- 
- */
 package NeuralNetwork;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
- * @author Stephen C.
- *
+ * @author Stephen C. & Jon Wu
+ * the connection between nodes on the neural network
  */
 public class Connection {
 

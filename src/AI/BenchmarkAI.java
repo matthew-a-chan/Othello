@@ -10,6 +10,9 @@ import game.Player;
 
 public class BenchmarkAI extends OthelloAI{
 
+	/*
+	 * from Matthew: this constructor is objectively bad
+	 */
 	public BenchmarkAI(Individual individual) {
 		this.i=individual;
 	}

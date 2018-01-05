@@ -8,6 +8,10 @@ import cabinet.Plugin;
 import cabinet.PluginInfo;
 import game.*;
 
+/**
+ * the framework of the AI
+ * creates a MiniMaxShrubbery, regardless if it is given a file
+ */
 public class OthelloAI extends Player{
 	
 	File f;
