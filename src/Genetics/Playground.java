@@ -32,7 +32,7 @@ public class Playground {
 
 	private final int refresh=40;
 
-	public static final int ply=4;
+	public static final int ply=3;
 	int genNumber=0;
 
 	Population currentPop;
@@ -63,7 +63,7 @@ public class Playground {
 
 		currentPop=new Population(genNumber);
 
-		for(int i=0;i<10;i++) {
+		for(int i=0;i<1000;i++) {
 			Match();
 			while(gamesComplete<populationSize*matchesPlayed-1) {try {Thread.sleep(refresh);} catch (InterruptedException e) {}}
 			if(genNumber%3==0) {
@@ -101,6 +101,7 @@ public class Playground {
 		try {
 			fr = new FileWriter(new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"BenchTest"+genNumber+".txt"));
 			fr.write(currentPop.population.get(0).getFitness()+"");
+			fr.write("\n"+currentPop.population.get(0).player.getName());
 			fr.flush();
 			fr.close();
 		} catch (IOException e) {e.printStackTrace();}
