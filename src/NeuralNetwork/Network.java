@@ -23,7 +23,9 @@ public class Network {
 
 
 
-	/*
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 * 
 	 * creates the neural network and all the connections between input nodes to hidden nodes, and hidden nodes to output nodes
 	 */
 	public Network() {
@@ -86,7 +88,7 @@ public class Network {
 		}
 	}
 
-	/*
+	/**
 	 * sets the weights for all connections in the NN
 	 */
 	public void train(String[] weights) {
@@ -95,7 +97,7 @@ public class Network {
 		}
 	}
 
-	/*
+	/**
 	 * returns the final value of a specific gamestate
 	 */
 	public double calculate(int[] Inputs) {
@@ -134,8 +136,4 @@ public class Network {
 		return OutNode.getValue();
 	}
 
-//	public static void main(String[] args) {
-//		Network network=new Network();
-		//new DrawingPane(network);
-//	}
 }

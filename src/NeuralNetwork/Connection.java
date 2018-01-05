@@ -13,38 +13,39 @@ public class Connection {
 
 	private double weight=0;
 
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 * 
+	 * Initializes a new connection with an output node
+	 *
+	 * @param output The output node
+	 */
 	public Connection(Node output) {
 		outputNode=output;
 	}
 
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 *
+	 * Feeds input through activation function, then pushes to output node
+	 *
+	 * @param input
+	 */
 	public void calculateConnection(double input){
 		double value=Math.tanh(input);
 		value*=weight;
 		outputNode.add(value);
 	}
 
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 * 
+	 * Sets the weight of the connection
+	 *
+	 * @param newWeight The new weight of the connection
+	 */
 	public void setWeight(double newWeight) {
 		weight=newWeight;
 	}
-
-	
-	
-	
-	
-	/*public void draw(Graphics2D g) {
-		if(weight>0.4) {
-			g.setColor(Color.GREEN);
-			g.drawLine(inputNode.x, inputNode.y, outputNode.x, outputNode.y);
-
-		}
-		else if(weight<-0.4) {
-			g.setColor(Color.RED);
-			g.drawLine(inputNode.x, inputNode.y, outputNode.x, outputNode.y);
-
-		}
-		else {
-			//g.setColor(Color.BLACK);
-		}
-	}*/
 	
 }

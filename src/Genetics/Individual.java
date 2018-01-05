@@ -67,7 +67,7 @@ public class Individual implements Comparable<Individual>{
 	/**
 	 * @author Jon Wu & Stephen Chern
 	 *
-	 * @return This indidual's player
+	 * @return This individual's player
 	 */
 	public Player getPlayer() {
 		return player;

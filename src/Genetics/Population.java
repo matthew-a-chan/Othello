@@ -29,7 +29,7 @@ public class Population {
 	 *
 	 * Initializes a population using files from generation 'currentGen'
 	 *
-	 * @param currentGen Rhe generation from which to initialize
+	 * @param currentGen The generation from which to initialize
 	 */
 	public Population(int currentGen) {
 

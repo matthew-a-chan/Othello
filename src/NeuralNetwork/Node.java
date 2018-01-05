@@ -17,7 +17,7 @@ public class Node {
 		outConnections=new Connection[ConnectionNumber];
 	}
 	
-	/*
+	/**
 	 * connects this node to the parameter other, other being the output node
 	 */
 	public Connection addConnection(Node other) {
@@ -31,7 +31,7 @@ public class Node {
 		value+=addend;
 	}
 	
-	/*
+	/**
 	 * sums up all the values from the input nodes to a hidden node, or the hidden nodes to an output node
 	 */
 	public void propagate() {
