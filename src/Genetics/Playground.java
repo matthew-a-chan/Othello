@@ -22,7 +22,7 @@ public class Playground {
 
 	//Mutation
 	static final double mutationRate=0.01;
-	static final double mutationAmount=0.06;
+	static final double mutationAmount=0.1;
 	static final double disruptiveMutationRate=.0005;
 	static final double range=1.0;
 	static final double regularization=0.99;
@@ -91,9 +91,10 @@ public class Playground {
 	public void benchTest() {
 		gamesComplete=0;
 		Collections.sort(currentPop.population);
+		Individual a=new Individual();
 		for(int i=0;i<50;i++) {
-			runGame(currentPop.population.get(0),new Individual());
-			runGame(new Individual(),currentPop.population.get(0));
+			runGame(currentPop.population.get(0),a);
+			runGame(a,currentPop.population.get(0));
 		}
 		while(gamesComplete<99)
 		{try {Thread.sleep(10);} catch (InterruptedException e) {}}

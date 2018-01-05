@@ -64,7 +64,7 @@ public abstract class TurnBasedGame implements GameState{
 				exec.shutdown();
 				try {
 					//if(p.getClass() == Player.class ){
-						task.get();
+					task.get();
 					//}
 					//else {
 					//	task.get(7, TimeUnit.SECONDS);
@@ -214,7 +214,7 @@ public abstract class TurnBasedGame implements GameState{
 
 		return rtn;
 	}
-	
+
 	@Override
 	public boolean removePlayer( Player p ){
 		boolean rtn = false;
@@ -266,14 +266,18 @@ public abstract class TurnBasedGame implements GameState{
 			while( !isGameOver() && !exit ){
 				playTurn();
 			}
-			
+
 			ArrayList<Player> activePlayers=new ArrayList<Player>();
-			
+
 			for( Team t : players ){
 				for(Player p : t) {
 					activePlayers.add(p);
 				}
 			}
+
+			Playground.gameComplete(activePlayers.get(0), activePlayers.get(1), getWinners().get(0).contains(activePlayers.get(0)));
+
+			System.out.println("GAME FINISHED:"+activePlayers.get(0).getName()+":"+activePlayers.get(1).getName()+":Won-"+(getWinners().get(0).contains(activePlayers.get(0))));
 		}
 	}
 }
