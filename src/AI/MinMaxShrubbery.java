@@ -8,6 +8,8 @@ import game.*;
 import game.Move;
 
 /**
+ * @author Jon Wu & Stephen Chern
+ * 
  * makes a NegaMaxTree and passes in current gamestate, as well as depth and neural network
  * makes the heuristic off the given file
  * if no file, then uses the hard-coded heuristic
@@ -20,7 +22,12 @@ public class MinMaxShrubbery
 	Player player;
 	private boolean isEvolving;
 
-
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 *
+	 * @param f The file to create the NegaMax Heuristic off of
+	 * @param p The player containing this tree
+	 */
 	public MinMaxShrubbery(File f,Player p) {
 		this.file=f;
 		this.player=p;
@@ -28,6 +35,11 @@ public class MinMaxShrubbery
 		NN=new Heuristic(file,player);
 	}
 
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 *
+	 * @param p The player containing this tree
+	 */
 	public MinMaxShrubbery(Player p) {
 		this.player=p;
 		isEvolving=false;
@@ -35,8 +47,11 @@ public class MinMaxShrubbery
 	}
 
 	
-	/*
-	 * sets coordinates of best move available
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 *
+	 * @param gs The current GameState
+	 * @param m The move to be returned after calculating from NegaMax
 	 */
 	public void getMove(GameState gs,Move m)
 	{

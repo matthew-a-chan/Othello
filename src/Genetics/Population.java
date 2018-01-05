@@ -14,6 +14,7 @@ import java.util.Collections;
 
 /**
  * @author Stephen C. & Jon Wu
+ * 
  * the collection of all AI-Individuals
  * used to "evolve" the population by cross-breeding AI's weighted on fitness
  */
@@ -23,6 +24,13 @@ public class Population {
 	ArrayList<Individual> population;
 	int genNumber;
 
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 *
+	 * Initializes a population using files from generation 'currentGen'
+	 *
+	 * @param currentGen Rhe generation from which to initialize
+	 */
 	public Population(int currentGen) {
 
 		population=new ArrayList<Individual>();
@@ -118,7 +126,7 @@ public class Population {
 						{
 							modifier *= -1;
 						}
-						
+
 						fw.write( (Double.parseDouble(parent1Gene[k])+Double.parseDouble(parent2Gene[k])) / 2 * Playground.regularization + modifier +" ");
 					}
 				}
@@ -132,7 +140,9 @@ public class Population {
 		}
 	}
 
-	/*
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 * 
 	 * creates and writes into a new folder the heuristics of the next generation
 	 * individuals of previous population are weighted by fitness (wins)
 	 */
@@ -149,7 +159,7 @@ public class Population {
 			System.out.print(population.get(i).getPlayer().getName()+" : ");
 		}
 		System.out.println();
-		
+
 		for(int i=0;i<Playground.populationSize;i++) {
 			System.out.println(population.get(i).getPlayer().getName()+":::"+population.get(i).getFitness());
 		}
@@ -198,59 +208,5 @@ public class Population {
 
 		return population.get(0); //hopefully doesn't get here
 	}
-
-
-	/*  INIT CODE-- plz no mess with :D
-	 * 		System.out.println("WHY");
-		int i=0;
-
-		FileWriter fw=null;
-
-		try {
-			File newFile=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+
-					"AI"+File.separator+"GEN"+0+File.separator+"GEN"+0+"-IND"+i);
-			System.out.println(newFile.getAbsolutePath());
-
-			fw = new FileWriter(newFile);
-
-			for(int k=0;k<2730;k++) {
-
-				fw.write(Math.random()-1/2.0+" ");
-
-			}
-
-			fw.flush();
-			fw.close();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("K");
-
-		for(i=1;i<1000;i++) {
-
-			File newFile=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+
-					"AI"+File.separator+"GEN"+0+File.separator+"GEN"+0+"-IND"+i);
-
-			File f1=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+
-					"AI"+File.separator+"GEN0"+File.separator+"GEN0-IND0");
-
-			try {
-				fw = new FileWriter(newFile);
-
-				BufferedReader a=new BufferedReader(new FileReader(f1));
-				System.out.println(fw);
-
-				fw.write(a.readLine());
-				a.close();
-				fw.flush();
-				fw.close();
-			}
-			catch(Exception e) {e.printStackTrace();}
-		}
-
-
-		System.exit(0);
-	 */
 
 }

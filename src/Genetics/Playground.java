@@ -13,6 +13,8 @@ import cabinet.GameState;
 
 
 /**
+ * @author Jon Wu & Stephen Chern
+ * 
  * the "ecosystem" that regulates the mutation rates, population size, etc. of current and future populations
  * also creates the new Populations (generations) when all the games between AIs have been finished
  */
@@ -48,12 +50,19 @@ public class Playground {
 	public static void main(String[] args) {
 		new Playground();
 	}
-
+	
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 * 
+	 * A constructor... I guess? It starts the program
+	 */
 	Playground(){
 		start();
 	}
 
-	/*
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 * 
 	 * runs all the AI vs AI games, and then creates a new generation after all the games are completed
 	 */
 	public void start() {
@@ -83,8 +92,10 @@ public class Playground {
 
 	}
 
-	/*
-	 * grabs 2 AIs out of the population and creates a game
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 * 
+	 * For each Individual in population, runs 20 games
 	 */
 	public void Match() {
 		for(int i=0;i<populationSize;i++) {
@@ -98,7 +109,7 @@ public class Playground {
 		}
 	}
 
-	public void benchmark() {
+	private void benchmark() {
 		gamesComplete=0;
 		Collections.sort(currentPop.population);
 		int fitness=currentPop.population.get(0).getFitness();
@@ -122,7 +133,7 @@ public class Playground {
 
 	}
 
-	public void runGame(Individual i1,Individual i2) {
+	private void runGame(Individual i1,Individual i2) {
 		GameState state = new Othello();//WOULD NEED TO MAKE ANOTHER ONE OF THESE FOR EACH GAME
 
 		Player player1=i1.getPlayer();
@@ -134,7 +145,10 @@ public class Playground {
 		state.start();//THEN FINALLY START IT -- IT WILL RETURN INFO UPON COMPLETION
 	}		
 
-	/*
+	/**
+	 * @author Jon Wu & Stephen Chern
+	 * 
+	 * Called upon completion of a game
 	 * adds 1 to fitness of either of AIs depending on outcome of game
 	 */
 	public static void gameComplete(Player player1, Player player2, boolean winner) { //True = player1 Wins, False = player2 Wins
@@ -151,7 +165,7 @@ public class Playground {
 	}
 
 
-	public void newGen() {
+	private void newGen() {
 		genNumber++;
 		gamesComplete=0;
 

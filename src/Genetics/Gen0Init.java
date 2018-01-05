@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 /**
- * used to specifically create the 0th generation's heuristics
+ * @author Jon Wu & Stephen Chern
+ * 
+ * used to specifically create the 0th generation's heuristics -- Basically never run
  */
 public class Gen0Init {
 	public static void main(String[] args) {
