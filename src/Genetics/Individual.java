@@ -10,6 +10,10 @@ import AI.BenchmarkAI;
 import AI.OthelloAI;
 import game.Player;
 
+/**
+ * represents an individual (AI) in a population (collection of AIs)
+ * contains AI-specific heuristic file
+ */
 public class Individual implements Comparable<Individual>{
 	
 	private int fitness=0;
@@ -65,6 +69,9 @@ public class Individual implements Comparable<Individual>{
 		return file;
 	}
 	
+	/*
+	 * adds 1 to AI's fitness counter if it won the game
+	 */
 	public void inputGameResult(Individual Other,boolean result) {//True = THIS won, False = Other won
 		results[Other.ID]=result;
 		if(result)

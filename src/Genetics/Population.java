@@ -1,6 +1,4 @@
-/**
- * @author Stephen C.
- */
+
 package Genetics;
 
 import java.io.BufferedReader;
@@ -15,8 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * @author Stephen C.
- *
+ * @author Stephen C. & Jon Wu
+ * the collection of all AI-Individuals
+ * used to "evolve" the population by cross-breeding AI's weighted on fitness
  */
 public class Population {
 
@@ -133,6 +132,10 @@ public class Population {
 		}
 	}
 
+	/*
+	 * creates and writes into a new folder the heuristics of the next generation
+	 * individuals of previous population are weighted by fitness (wins)
+	 */
 	public void newGen() {
 		File genFolder=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"GEN"+(genNumber+1));
 		genFolder.mkdir();

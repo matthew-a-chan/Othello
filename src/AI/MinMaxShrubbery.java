@@ -7,6 +7,11 @@ import cabinet.GameState;
 import game.*;
 import game.Move;
 
+/**
+ * makes a NegaMaxTree and passes in current gamestate, as well as depth and neural network
+ * makes the heuristic off the given file
+ * if no file, then uses the hard-coded heuristic
+ */
 public class MinMaxShrubbery
 {
 
@@ -29,7 +34,10 @@ public class MinMaxShrubbery
 		NN=new Heuristic(player);
 	}
 
-
+	
+	/*
+	 * sets coordinates of best move available
+	 */
 	public void getMove(GameState gs,Move m)
 	{
 		Move move=new Move();

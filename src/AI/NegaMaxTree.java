@@ -6,12 +6,14 @@ import Genetics.Playground;
 import cabinet.*;
 import game.Move;
 
+/**
+ * the algorithm used for the AI to pick the best move 
+ */
 public class NegaMaxTree {
 
 	GameState gs;
 	Move move;
 	Integer color; //1 for AI -1 for opponent
-	//Double bestMove;
 	Heuristic h;
 
 	public NegaMaxTree(GameState gs,Move move, Heuristic h){
@@ -28,7 +30,7 @@ public class NegaMaxTree {
 		makeMoves(gs, ply, Double.MIN_VALUE, Double.MAX_VALUE, 1,true);
 	}
 
-	public double makeMoves(GameState gs, Integer depth,double A,double B, Integer color,boolean isRoot)
+	private double makeMoves(GameState gs, Integer depth,double A,double B, Integer color,boolean isRoot)
 	{
 		//System.out.println(depth);
 		if (depth == 0 || gs.isGameOver())
@@ -38,7 +40,7 @@ public class NegaMaxTree {
 
 		List<Move> moves=gs.getValidMoves();
 		double bestMove = -1000000000.0;
-		while(!moves.isEmpty()) //modify beta and alpha values
+		while(!moves.isEmpty()) 
 		{
 			Move move=moves.remove(0);
 			GameState newgs=gs.copyInstance();
@@ -52,7 +54,6 @@ public class NegaMaxTree {
 				bestMove=m;
 				if(isRoot) {
 					//System.out.println("BEST MOVE YET"+move.to.x+"::"+move.to.y+"::"+isRoot);
-
 					//System.err.println("CHANGING");
 					this.move.to.x=move.to.x;
 					this.move.to.y=move.to.y;

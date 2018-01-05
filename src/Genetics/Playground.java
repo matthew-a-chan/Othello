@@ -12,6 +12,10 @@ import othello.Othello;
 import cabinet.GameState;
 
 
+/**
+ * the "ecosystem" that regulates the mutation rates, population size, etc. of current and future populations
+ * also creates the new Populations (generations) when all the games between AIs have been finished
+ */
 public class Playground {
 
 
@@ -49,6 +53,9 @@ public class Playground {
 		start();
 	}
 
+	/*
+	 * runs all the AI vs AI games, and then creates a new generation after all the games are completed
+	 */
 	public void start() {
 		File data=new File(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"AI"+File.separator+"DATA.txt");
 
@@ -68,7 +75,7 @@ public class Playground {
 			while(gamesComplete<populationSize*matchesPlayed-1) {try {Thread.sleep(refresh);} catch (InterruptedException e) {}}
 			if(genNumber%1==0) {
 				System.out.println("BENCH TEST");
-				benchTest();
+				benchmark();
 			}
 			System.out.println("NEW GEN INCOMING");
 			newGen();
@@ -76,6 +83,9 @@ public class Playground {
 
 	}
 
+	/*
+	 * grabs 2 AIs out of the population and creates a game
+	 */
 	public void Match() {
 		for(int i=0;i<populationSize;i++) {
 			int startGamesComplete=gamesComplete;
@@ -88,7 +98,7 @@ public class Playground {
 		}
 	}
 
-	public void benchTest() {
+	public void benchmark() {
 		gamesComplete=0;
 		Collections.sort(currentPop.population);
 		int fitness=currentPop.population.get(0).getFitness();
@@ -124,6 +134,9 @@ public class Playground {
 		state.start();//THEN FINALLY START IT -- IT WILL RETURN INFO UPON COMPLETION
 	}		
 
+	/*
+	 * adds 1 to fitness of either of AIs depending on outcome of game
+	 */
 	public static void gameComplete(Player player1, Player player2, boolean winner) { //True = player1 Wins, False = player2 Wins
 		player1.getIndividual().inputGameResult(player2.getIndividual(),winner);
 		player2.getIndividual().inputGameResult(player1.getIndividual(),!winner);
