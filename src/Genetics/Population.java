@@ -146,6 +146,10 @@ public class Population {
 			System.out.print(population.get(i).getPlayer().getName()+" : ");
 		}
 		System.out.println();
+		
+		for(int i=0;i<Playground.populationSize;i++) {
+			System.out.println(population.get(i).getPlayer().getName()+":::"+population.get(i).getFitness());
+		}
 
 
 		int i=0;

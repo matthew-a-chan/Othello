@@ -32,7 +32,7 @@ public class Playground {
 
 	private final int refresh=40;
 
-	public static final int ply=3;
+	public static final int ply=4;
 	int genNumber=0;
 
 	Population currentPop;
@@ -66,7 +66,7 @@ public class Playground {
 		for(int i=0;i<1000;i++) {
 			Match();
 			while(gamesComplete<populationSize*matchesPlayed-1) {try {Thread.sleep(refresh);} catch (InterruptedException e) {}}
-			if(genNumber%3==0) {
+			if(genNumber%1==0) {
 				System.out.println("BENCH TEST");
 				benchTest();
 			}
@@ -91,7 +91,9 @@ public class Playground {
 	public void benchTest() {
 		gamesComplete=0;
 		Collections.sort(currentPop.population);
+		int fitness=currentPop.population.get(0).getFitness();
 		Individual a=new Individual();
+		System.out.println(currentPop.population.get(0).player.getName()+":::"+currentPop.population.get(0).getFitness());
 		for(int i=0;i<50;i++) {
 			runGame(currentPop.population.get(0),a);
 			runGame(a,currentPop.population.get(0));
@@ -106,7 +108,7 @@ public class Playground {
 			fr.flush();
 			fr.close();
 		} catch (IOException e) {e.printStackTrace();}
-		currentPop.population.get(0).resetFitness();
+		currentPop.population.get(0).resetFitness(fitness);
 
 	}
 
