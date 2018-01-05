@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 
+import AI.OthelloAI;
 import game.Player;
 import othello.Othello;
 import cabinet.GameState;
@@ -50,7 +51,7 @@ public class Playground {
 	public static void main(String[] args) {
 		new Playground();
 	}
-	
+
 	/**
 	 * @author Jon Wu & Stephen Chern
 	 * 
@@ -152,16 +153,19 @@ public class Playground {
 	 * adds 1 to fitness of either of AIs depending on outcome of game
 	 */
 	public static void gameComplete(Player player1, Player player2, boolean winner) { //True = player1 Wins, False = player2 Wins
-		player1.getIndividual().inputGameResult(player2.getIndividual(),winner);
-		player2.getIndividual().inputGameResult(player1.getIndividual(),!winner);
-		if(winner) {
-			//System.out.println(player1.getName());
+		if(player1.getClass()==OthelloAI.class&&player2.getClass()==OthelloAI.class) {
+
+			player1.getIndividual().inputGameResult(player2.getIndividual(),winner);
+			player2.getIndividual().inputGameResult(player1.getIndividual(),!winner);
+			if(winner) {
+				//System.out.println(player1.getName());
+			}
+			else {
+				//System.out.println(player2.getName());
+			}
+			//System.out.println(gamesComplete);
+			gamesComplete++;
 		}
-		else {
-			//System.out.println(player2.getName());
-		}
-		//System.out.println(gamesComplete);
-		gamesComplete++;
 	}
 
 
